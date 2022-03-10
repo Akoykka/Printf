@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   applyflags.c                                       :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 12:11:05 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/10 14:29:28 by akoykka          ###   ########.fr       */
+/*   Created: 2021/11/07 16:26:34 by akoykka           #+#    #+#             */
+/*   Updated: 2021/12/07 22:06:05 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-char *apply_flags(t_flags *modifiers)
+char	*ft_strcat(char *s1, const char *s2)
 {
-	apply_sign
-	apply_space
-	apply_zero
-	apply_decimal
+	size_t	i;
+	size_t	j;
 
-
-
-
-
+	j = 0;
+	i = ft_strlen(s1);
+	while (s2[j])
+	{
+		s1[i] = s2[j];
+		++i;
+		++j;
+	}
+	s1[i] = '\0';
+	return (s1);
 }

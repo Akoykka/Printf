@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   applyflags.c                                       :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 12:11:05 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/10 14:29:28 by akoykka          ###   ########.fr       */
+/*   Created: 2021/11/08 14:40:54 by akoykka           #+#    #+#             */
+/*   Updated: 2021/12/06 21:44:05 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-char *apply_flags(t_flags *modifiers)
+char	*ft_strstr(const char *haystack, const char *needle)
 {
-	apply_sign
-	apply_space
-	apply_zero
-	apply_decimal
+	int	n;
 
-
-
-
-
+	if (!*needle)
+		return ((char *)haystack);
+	while (*haystack)
+	{	
+		n = 0;
+		while (needle[n] == haystack[n])
+		{
+			n++;
+			if (!needle[n])
+				return ((char *)haystack);
+		}
+		haystack++;
+	}
+	return (NULL);
 }

@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   applyflags.c                                       :+:      :+:    :+:   */
+/*   ft_lstcount.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 12:11:05 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/10 14:29:28 by akoykka          ###   ########.fr       */
+/*   Created: 2021/12/08 15:04:55 by akoykka           #+#    #+#             */
+/*   Updated: 2021/12/08 15:16:24 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-char *apply_flags(t_flags *modifiers)
+size_t	ft_lstcount(t_list *start)
 {
-	apply_sign
-	apply_space
-	apply_zero
-	apply_decimal
+	size_t	i;
+	t_list	*temp;
 
-
-
-
-
+	i = 0;
+	if (!start)
+		return (i);
+	temp = start;
+	while (temp)
+	{
+		temp = temp->next;
+		++i;
+	}
+	return (i);
 }

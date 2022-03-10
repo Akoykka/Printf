@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   applyflags.c                                       :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: akoykka <koykka.atte@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 12:11:05 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/10 14:29:28 by akoykka          ###   ########.fr       */
+/*   Created: 2021/11/11 15:54:40 by akoykka           #+#    #+#             */
+/*   Updated: 2021/12/03 18:21:00 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-char *apply_flags(t_flags *modifiers)
+int	ft_toupper(int c)
 {
-	apply_sign
-	apply_space
-	apply_zero
-	apply_decimal
-
-
-
-
-
+	if (c >= 97 && c <= 122)
+		return (c - 32);
+	return (c);
 }

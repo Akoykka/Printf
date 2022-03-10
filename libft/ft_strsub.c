@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   applyflags.c                                       :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 12:11:05 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/10 14:29:28 by akoykka          ###   ########.fr       */
+/*   Created: 2021/11/17 12:40:47 by akoykka           #+#    #+#             */
+/*   Updated: 2022/01/06 14:33:10 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-char *apply_flags(t_flags *modifiers)
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	apply_sign
-	apply_space
-	apply_zero
-	apply_decimal
+	char	*substring;
+	int		i;
 
-
-
-
-
+	i = 0;
+	if (!s)
+		return (NULL);
+	substring = (char *)malloc(sizeof(char) * (len + 1));
+	if (!substring)
+		return (NULL);
+	while (len--)
+	{
+		substring[i] = s[start];
+		++i;
+		++start;
+	}
+	substring[i] = '\0';
+	return (substring);
 }

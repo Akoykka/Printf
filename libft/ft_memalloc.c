@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   applyflags.c                                       :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 12:11:05 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/10 14:29:28 by akoykka          ###   ########.fr       */
+/*   Created: 2021/11/15 10:55:24 by akoykka           #+#    #+#             */
+/*   Updated: 2021/12/07 22:05:58 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-char *apply_flags(t_flags *modifiers)
+void	*ft_memalloc(size_t size)
 {
-	apply_sign
-	apply_space
-	apply_zero
-	apply_decimal
+	void	*fresh;
+	int		i;
 
-
-
-
-
+	i = 0;
+	fresh = (void *)malloc(size);
+	if (!fresh)
+		return (NULL);
+	while (size--)
+	{
+		((unsigned char *)fresh)[i] = 0;
+		++i;
+	}
+	return (fresh);
 }

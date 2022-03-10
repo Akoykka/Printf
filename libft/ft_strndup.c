@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   applyflags.c                                       :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: akoykka <koykka.atte@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 12:11:05 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/10 14:29:28 by akoykka          ###   ########.fr       */
+/*   Created: 2021/11/24 22:01:37 by akoykka           #+#    #+#             */
+/*   Updated: 2021/12/04 22:27:12 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-char *apply_flags(t_flags *modifiers)
+char	*ft_strndup(const char *s1, size_t n)
 {
-	apply_sign
-	apply_space
-	apply_zero
-	apply_decimal
+	char	*fresh;
 
-
-
-
-
+	fresh = (char *)malloc(sizeof(char) * (n + 1));
+	if (!fresh)
+		return (NULL);
+	ft_strncpy(fresh, (char *)s1, n)[n] = '\0';
+	return (fresh);
 }

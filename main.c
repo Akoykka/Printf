@@ -6,21 +6,11 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 18:10:06 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/10 12:28:58 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/03/10 14:46:08 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-typedef struct s_flags
-{
-	int		sign_flag;		// ( + ) show + or minus in the front overrides space
-	int		zero_flag;		// (0 and number)
-	int		decimal_flag;	 // period and number
-	int		space_flag;	// space and number
-	int		minus_flag;		// minus and number
-	char	type[30];			// the actual type of the printable
-}		t_flags;
 
 int	int_len(int number)
 {
@@ -152,30 +142,24 @@ t_flags	*check_for_flags(char *input)
 	return (modifiers);
 }
 
-void ft_printf(char *string, ...)
+void ft_printf(char *format, ...)
 {
 	t_flags	*modifiers;
-	va_list	*variableptr;
+	void	*pointer;
 	int		i;
-	char *pointer
 
 	i = 0;
-	va_start(va_list, string);
-	while (string[i])
+	while (format[i])
 	{
-		while (string[i] != '%' && string[i])
+		while (format[i] != '%' && format[i])
 		{
-			ft_putchar(string[i]);
+			ft_putchar(format[i]);
 			++i;
 		}
-		modifiers = check_for_flags(string);
+		modifiers = check_for_flags(format);
 		exit (1);
 		if (modifiers != NULL)
-		{
-			va_list = va_arg(variableptr, modifiers->type);
-			apply_flags(string, modifiers);
-			free(modifiers);
-		}
+			convert_and_print(format, modifiers)
 	}	
 }
 

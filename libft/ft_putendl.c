@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   applyflags.c                                       :+:      :+:    :+:   */
+/*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: akoykka <koykka.atte@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 12:11:05 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/10 14:29:28 by akoykka          ###   ########.fr       */
+/*   Created: 2021/11/20 17:58:14 by akoykka           #+#    #+#             */
+/*   Updated: 2021/12/03 18:21:00 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-char *apply_flags(t_flags *modifiers)
+void	ft_putendl(char const *s)
 {
-	apply_sign
-	apply_space
-	apply_zero
-	apply_decimal
+	int	i;
 
-
-
-
-
+	i = 0;
+	if (!s)
+		return ;
+	while (s[i])
+	{
+		write(1, &s[i], 1);
+		++i;
+	}
+	write(1, "\n", 1);
 }

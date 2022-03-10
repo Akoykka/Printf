@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   applyflags.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 12:11:05 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/10 14:29:28 by akoykka          ###   ########.fr       */
+/*   Created: 2021/11/17 10:35:23 by akoykka           #+#    #+#             */
+/*   Updated: 2022/01/06 14:39:47 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-char *apply_flags(t_flags *modifiers)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int i, char c))
 {
-	apply_sign
-	apply_space
-	apply_zero
-	apply_decimal
+	char			*fresh;
+	unsigned int	i;
 
-
-
-
-
+	i = 0;
+	if (!f || !s)
+		return (NULL);
+	fresh = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!fresh)
+		return (NULL);
+	while (s[i])
+	{
+		fresh[i] = f(i, s[i]);
+		++i;
+	}
+	fresh[i] = '\0';
+	return (fresh);
 }

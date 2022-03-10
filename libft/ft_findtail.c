@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   applyflags.c                                       :+:      :+:    :+:   */
+/*   ft_findtail.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 12:11:05 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/10 14:29:28 by akoykka          ###   ########.fr       */
+/*   Created: 2021/12/08 15:12:28 by akoykka           #+#    #+#             */
+/*   Updated: 2021/12/10 13:48:39 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-char *apply_flags(t_flags *modifiers)
+t_list	*ft_findtail(t_list *start)
 {
-	apply_sign
-	apply_space
-	apply_zero
-	apply_decimal
+	t_list	*temp;
 
-
-
-
-
+	if (!start)
+		return (NULL);
+	temp = start;
+	while (temp->next)
+	{
+		temp = temp->next;
+	}
+	return (temp);
 }

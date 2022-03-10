@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   applyflags.c                                       :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 12:11:05 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/10 14:29:28 by akoykka          ###   ########.fr       */
+/*   Created: 2021/11/08 20:00:47 by akoykka           #+#    #+#             */
+/*   Updated: 2021/12/09 10:46:11 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-char *apply_flags(t_flags *modifiers)
+char	*ft_strchr(const char *s, int c)
 {
-	apply_sign
-	apply_space
-	apply_zero
-	apply_decimal
-
-
-
-
-
+	while (*s != '\0')
+	{
+		if (c == *s)
+			return ((char *) s);
+		++s;
+	}
+	if (c == 0)
+		return ((char *)s);
+	return (NULL);
 }

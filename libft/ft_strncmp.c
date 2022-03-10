@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   applyflags.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 12:11:05 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/10 14:29:28 by akoykka          ###   ########.fr       */
+/*   Created: 2021/11/07 14:03:32 by akoykka           #+#    #+#             */
+/*   Updated: 2021/12/13 11:29:13 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-char *apply_flags(t_flags *modifiers)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	apply_sign
-	apply_space
-	apply_zero
-	apply_decimal
+	size_t	i;
 
-
-
-
-
+	i = 0;
+	while (n > i && ((unsigned char *)s1)[i] == ((unsigned char *)s2)[i])
+	{
+		if (!s1[i] || !s2[i])
+			return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
+		++i;
+	}
+	if (i == n)
+		return (0);
+	return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
 }

@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   applyflags.c                                       :+:      :+:    :+:   */
+/*   ft_memrcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 12:11:05 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/10 14:29:28 by akoykka          ###   ########.fr       */
+/*   Created: 2021/12/04 23:35:38 by akoykka           #+#    #+#             */
+/*   Updated: 2021/12/06 21:44:11 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-char *apply_flags(t_flags *modifiers)
+void	*ft_memrcpy(void *dst, const void *src, size_t n)
 {
-	apply_sign
-	apply_space
-	apply_zero
-	apply_decimal
-
-
-
-
-
+	if (!dst && !src)
+		n = 0;
+	while (n--)
+		((unsigned char *)dst)[n] = ((const unsigned char *)src)[n];
+	return (dst);
 }

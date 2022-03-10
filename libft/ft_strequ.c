@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   applyflags.c                                       :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: akoykka <koykka.atte@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 12:11:05 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/10 14:29:28 by akoykka          ###   ########.fr       */
+/*   Created: 2021/11/17 11:08:46 by akoykka           #+#    #+#             */
+/*   Updated: 2021/12/04 22:50:46 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-char *apply_flags(t_flags *modifiers)
+int	ft_strequ(char const *s1, char const *s2)
 {
-	apply_sign
-	apply_space
-	apply_zero
-	apply_decimal
+	int	i;
 
-
-
-
-
+	i = 0;
+	if (!s1 || !s2)
+		return (0);
+	while (s1[i] || s2[i])
+	{
+		if (s1[i] == s2[i])
+			++i;
+		else
+			return (0);
+	}
+	return (1);
 }

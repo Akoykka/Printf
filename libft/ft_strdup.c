@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   applyflags.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 12:11:05 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/10 14:29:28 by akoykka          ###   ########.fr       */
+/*   Created: 2021/11/01 12:36:03 by akoykka           #+#    #+#             */
+/*   Updated: 2021/12/17 21:07:54 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-char *apply_flags(t_flags *modifiers)
+char	*ft_strdup(const char *s1)
 {
-	apply_sign
-	apply_space
-	apply_zero
-	apply_decimal
+	char	*copy;
 
-
-
-
-
+	copy = (char *)malloc(sizeof(char) * ((ft_strlen(s1) + 1)));
+	if (!copy)
+		return (NULL);
+	return (ft_strcpy(copy, (char *)s1));
 }

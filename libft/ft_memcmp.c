@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   applyflags.c                                       :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 12:11:05 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/10 14:29:28 by akoykka          ###   ########.fr       */
+/*   Created: 2021/11/12 14:10:29 by akoykka           #+#    #+#             */
+/*   Updated: 2021/12/08 14:53:51 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-char *apply_flags(t_flags *modifiers)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	apply_sign
-	apply_space
-	apply_zero
-	apply_decimal
+	const unsigned char	*str1;
+	const unsigned char	*str2;
 
-
-
-
-
+	str1 = s1;
+	str2 = s2;
+	while (n--)
+	{
+		if (*str1 != *str2)
+			return (*str1 - *str2);
+		++str1;
+		++str2;
+	}
+	return (0);
 }

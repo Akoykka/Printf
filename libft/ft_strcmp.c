@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   applyflags.c                                       :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 12:11:05 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/10 14:29:28 by akoykka          ###   ########.fr       */
+/*   Created: 2021/10/29 16:03:44 by akoykka           #+#    #+#             */
+/*   Updated: 2021/12/08 14:39:05 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-char *apply_flags(t_flags *modifiers)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	apply_sign
-	apply_space
-	apply_zero
-	apply_decimal
+	int	i;
 
-
-
-
-
+	i = 0;
+	while (s1[i] || s2[i])
+	{
+		if (((unsigned char *)s1)[i] != ((unsigned char *)s2)[i])
+			return ((((unsigned char *)s1)[i]) - (((unsigned char *)s2)[i]));
+		++i;
+	}
+	return ((((unsigned char *)s1)[i]) - (((unsigned char *)s2)[i]));
 }
