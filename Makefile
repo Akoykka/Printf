@@ -6,7 +6,7 @@
 #    By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 18:10:03 by akoykka           #+#    #+#              #
-#    Updated: 2022/03/14 14:29:52 by akoykka          ###   ########.fr        #
+#    Updated: 2022/03/14 23:30:35 by akoykka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CC = clang
 
 FLAGS = -Wall -Werror -Wextra
 FLAGS += -g
- 
+
 INCLUDES = -I . -I libft -L libft -lft
 
 all: $(NAME)
@@ -28,7 +28,10 @@ $(NAME):
 clean:
 
 fclean: clean
-		
+
 		@rm -f $(NAME)
 
 re: fclean all
+
+run:
+	./$(NAME)

@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:00:13 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/14 15:12:03 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/03/14 22:55:40 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ char	*check_sign_flag(t_flags *modifiers, char *temp)
 		modifiers->sign_flag = 1;
 		return (++temp);
 	}
-	if (*(temp + 1) == '-')
+	if (*temp == '-')
 	{
-		modifiers->sign_flag = -1;
-		return (++temp);
+		++temp;
+		modifiers->minus_flag = ft_atoi(temp);
+		temp = temp + int_len(modifiers->minus_flag);
 	}
 	return (temp);
 }

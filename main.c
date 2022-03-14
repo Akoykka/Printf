@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 18:10:06 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/14 15:40:22 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/03/14 23:36:43 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,17 @@ size_t	check_for_flags(char *format, t_flags *modifiers)
 	return (1);
 }
 
+void reset_flags(t_flags *modifiers)
+{
+	modifiers->minus_flag = 0;
+	modifiers->sign_flag = 0;
+	modifiers->zero_flag = 0;
+	modifiers->decimal_flag = 0;
+	modifiers->space_flag = 0;
+	modifiers->conversion_index = 0;
+	modifiers->min_field_depth = 0;
+}
+
 void	ft_printf(char *format, ...)
 {
 	int		i;
@@ -83,20 +94,42 @@ void	ft_printf(char *format, ...)
 	while (format[i])
 	{
 		if (format[i] == '%')
+		{
 			i += check_for_flags(&format[i], modifiers);
-		write(1, &format[i], 1);
-		++i;
+			reset_flags(modifiers);
+			if (!format[i])
+				break;
+		}
+		else
+		{
+			write(1, &format[i], 1);
+			++i;
+		}
 	}
-	ft_putchar('\n');
+	ft_putchar('\n'); // just for convenience
 }
 
 int	main(void)
 {
 	int	number;
+	int number2;
 
+	number2 = 12;
 	number = 11;
-	ft_printf("MY this is a text %d ", number);
+	ft_printf("MY just integer %d", number);
+	printf("OG just integer %d\n", number);
+	ft_printf("MY integer with - and .10 %-.10d", number);
+	printf("OG integer with - and .10 %-.10d\n", number);
+	ft_printf("MY integer with + and .10 %+.10d", number);
+	printf("OG integer with + and .10 %+.10d\n", number);
 
+	ft_printf("first number:%d second number:%d", number, number2);
+	printf("first number:%d second number:%d\n", number, number2);
+
+	ft_printf("first number w flags :%0.9d second number w/o:%d", number, number2);
+	printf("first number w flags :%.9d second number w/o:%d\n", number, number2);
+	ft_printf("MY alternatin numbers %d%d%d%d%d%d%d%d%d", number, number2,number, number2, number, number2,number, number2,number);
+	printf("OGalternatin numbers %d%d%d%d%d%d%d%d%d\n", number, number2,number, number2, number, number2,number, number2,number);
 
 
 
