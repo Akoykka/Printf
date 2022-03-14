@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 09:23:37 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/14 10:58:19 by akoykka          ###   ########.fr       */
+/*   Created: 2022/03/14 13:05:55 by akoykka           #+#    #+#             */
+/*   Updated: 2022/03/14 13:07:57 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "ft_printf.h"
 
-int main(void)
+int	int_len(int number)
 {
-	int	i;
+	int	lenght;
 
-	i = 1234;
-	printf("int is 1234 % 12.12d\n", i);
-//	printf("test %.12 12d", i); NOT VALID
-//	printf("test %-.12 12d", i); NOT VALID
-	printf("int is 1234 %- 12.12d\n", i);
-
-
-	printf("int is 1234 %- .d\n", i);
-
-	return (0);
+	lenght = 0;
+	while (number != 0)
+	{
+		number = number / 10;
+		++lenght;
+	}
+	return (lenght);
 }

@@ -1,16 +1,16 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 18:10:03 by akoykka           #+#    #+#              #
-#    Updated: 2022/03/03 22:07:18 by akoykka          ###   ########.fr        #
+#    Updated: 2022/03/14 14:29:52 by akoykka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = main.c \
+SRCS = main.c flags.c utils.c di_apply_flags.c conversions.c \
 
 NAME = ft_printf
 

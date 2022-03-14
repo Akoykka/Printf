@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   applyflags.c                                       :+:      :+:    :+:   */
+/*   conversions.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 12:11:05 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/10 14:29:28 by akoykka          ###   ########.fr       */
+/*   Created: 2022/03/14 14:29:41 by akoykka           #+#    #+#             */
+/*   Updated: 2022/03/14 15:30:24 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char *apply_flags(t_flags *modifiers)
+void	decimal_conversion(t_flags *modifiers)
 {
-	apply_sign
-	apply_space
-	apply_zero
-	apply_decimal
+	int	*pointer;
 
-
-
-
-
+	pointer = ft_memalloc(sizeof(int));
+	*pointer = va_arg(modifiers->va_pointer, int);
+	di_apply_decimal_flag(modifiers, *pointer);
+	di_apply_space_flag(modifiers, *pointer);
+	apply_min_field_width(modifiers, *pointer);
+	ft_putnbr(*pointer);
 }
