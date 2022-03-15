@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:15:58 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/15 10:43:54 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/03/15 15:41:48 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void di_apply_min_field_width(t_flags *modifiers, int number)
 
 void di_apply_plus_flag(t_flags *modifiers, int number)
 {
-	t_flags *ptr;
+	t_flags	*ptr;
 
 	ptr = modifiers;
 	if (number >= 0 && modifiers->sign_flag == 1)

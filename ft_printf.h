@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 18:12:57 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/15 10:44:20 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/03/15 19:00:32 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct s_flags
 
 // Utils
 
-int	int_len(int number);
-void reset_flags(t_flags *modifiers);
+int		int_len(int number);
+void	reset_flags(t_flags *modifiers);
 // Flag recognition phase
 
 
@@ -49,10 +49,16 @@ size_t	check_for_flags(char *format, t_flags *modifiers);
 
 // conversion functions
 void	decimal_conversion(t_flags *modifiers);
-// apply phase
+void	string_conversion(t_flags *modifiers);
+// apply phase decimals
 void	di_apply_plus_flag(t_flags *modifiers, int number);
 void 	di_apply_min_field_width(t_flags *modifiers, int number);
 void	di_apply_decimal_flag(t_flags *modifiers, int number);
 void	di_apply_space_flag(t_flags *modifiers, int number);
 void	di_apply_zero_flag(t_flags *modifiers, int number);
+// apply phase string
+char	*s_apply_decimal_flag(t_flags *modifiers, char *pointer);
+void	s_apply_and_print_minus_flag(t_flags *modifiers, char *pointer);
+void	s_apply_and_print_width(t_flags *modifiers, char *pointer);
+
 #endif

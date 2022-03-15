@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 18:10:06 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/14 23:36:43 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/03/15 19:10:40 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void print_from_conversion_table(int index, t_flags *modifiers)
 	ptr_to_conversion_function table[] =
 	{
 		decimal_conversion,
-		decimal_conversion
+		decimal_conversion,
+		string_conversion
 		/*octal_conversion
 		unsigned_integer_conversion
 		hexadecimal_conversion_lowercase
@@ -35,7 +36,7 @@ int type_conversion(t_flags *modifiers, char *format)
 	int		index;
 
 	index = 0;
-	ft_strcpy(available_conversions, "di"); //ouxXf%
+	ft_strcpy(available_conversions, "dis"); //ouxXf%
 
 	while (available_conversions[index])
 	{
@@ -61,7 +62,7 @@ size_t	check_for_flags(char *format, t_flags *modifiers)
 	format = check_for_space_flag(modifiers, format);
 	format = check_for_zero_flag(modifiers, format);
 	format = check_decimal_flag(modifiers, format);
-	format = check_minimum_field_of_width(modifiers,format);
+	format = check_minimum_field_of_width(modifiers, format);
 	if (type_conversion(modifiers, format) == SUCCESS)
 	{
 		++format;
@@ -98,7 +99,7 @@ void	ft_printf(char *format, ...)
 			i += check_for_flags(&format[i], modifiers);
 			reset_flags(modifiers);
 			if (!format[i])
-				break;
+				break ;
 		}
 		else
 		{
@@ -113,9 +114,12 @@ int	main(void)
 {
 	int	number;
 	int number2;
+	char str[] = "ananasakaama";
+
 
 	number2 = 12;
 	number = 11;
+	/*
 	ft_printf("MY just integer %d", number);
 	printf("OG just integer %d\n", number);
 	ft_printf("MY integer with - and .10 %-.10d", number);
@@ -130,8 +134,11 @@ int	main(void)
 	printf("first number w flags :%.9d second number w/o:%d\n", number, number2);
 	ft_printf("MY alternatin numbers %d%d%d%d%d%d%d%d%d", number, number2,number, number2, number, number2,number, number2,number);
 	printf("OGalternatin numbers %d%d%d%d%d%d%d%d%d\n", number, number2,number, number2, number, number2,number, number2,number);
-
-
+	*/
+	ft_printf("regular: |%s|", str);
+	ft_printf(".5: |%.5s|", str);
+	ft_printf("5: |%5s|", str);
+	ft_printf("25: |%25s|", str);
 
 	//
 
