@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 18:12:57 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/14 23:33:45 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/03/15 10:44:20 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ size_t	check_for_flags(char *format, t_flags *modifiers);
 // conversion functions
 void	decimal_conversion(t_flags *modifiers);
 // apply phase
-void	apply_plus_flag(t_flags *modifiers, int number);
-void 	apply_min_field_width(t_flags *modifiers, int number);
+void	di_apply_plus_flag(t_flags *modifiers, int number);
+void 	di_apply_min_field_width(t_flags *modifiers, int number);
 void	di_apply_decimal_flag(t_flags *modifiers, int number);
 void	di_apply_space_flag(t_flags *modifiers, int number);
 void	di_apply_zero_flag(t_flags *modifiers, int number);

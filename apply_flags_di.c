@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   di_apply_flags.c                                   :+:      :+:    :+:   */
+/*   apply_flags_di.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:15:58 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/14 23:14:00 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/03/15 10:43:54 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	di_apply_zero_flag(t_flags *modifiers, int number)
 
 }
 
-void apply_min_field_width(t_flags *modifiers, int number)
+void di_apply_min_field_width(t_flags *modifiers, int number)
 {
 	int	loop;
 
@@ -53,7 +53,7 @@ void apply_min_field_width(t_flags *modifiers, int number)
 		ft_putchar(' ');
 }
 
-void apply_plus_flag(t_flags *modifiers, int number)
+void di_apply_plus_flag(t_flags *modifiers, int number)
 {
 	t_flags *ptr;
 

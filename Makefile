@@ -6,11 +6,12 @@
 #    By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 18:10:03 by akoykka           #+#    #+#              #
-#    Updated: 2022/03/14 23:30:35 by akoykka          ###   ########.fr        #
+#    Updated: 2022/03/15 10:43:09 by akoykka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = main.c flags.c utils.c di_apply_flags.c conversions.c \
+SRCS = main.c flags.c utils.c apply_flags_di.c conversions.c \
+		apply_flags_s.c
 
 NAME = ft_printf
 
