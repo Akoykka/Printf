@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 18:10:06 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/15 19:10:40 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/03/16 13:02:33 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void print_from_conversion_table(int index, t_flags *modifiers)
 		decimal_conversion,
 		decimal_conversion,
 		string_conversion
-		/*octal_conversion
+		octal_conversion
 		unsigned_integer_conversion
 		hexadecimal_conversion_lowercase
 		hexadecimal_conversion_uppercase
@@ -59,10 +59,10 @@ size_t	check_for_flags(char *format, t_flags *modifiers)
 	++format;
 
 	format = check_sign_flag(modifiers, format);
+	format = check_minimum_field_of_width(modifiers, format);
 	format = check_for_space_flag(modifiers, format);
 	format = check_for_zero_flag(modifiers, format);
 	format = check_decimal_flag(modifiers, format);
-	format = check_minimum_field_of_width(modifiers, format);
 	if (type_conversion(modifiers, format) == SUCCESS)
 	{
 		++format;
@@ -71,7 +71,7 @@ size_t	check_for_flags(char *format, t_flags *modifiers)
 	return (1);
 }
 
-void reset_flags(t_flags *modifiers)
+void	reset_flags(t_flags *modifiers)
 {
 	modifiers->minus_flag = 0;
 	modifiers->sign_flag = 0;
@@ -114,7 +114,7 @@ int	main(void)
 {
 	int	number;
 	int number2;
-	char str[] = "ananasakaama";
+	char str[] = "kullikikkeli";
 
 
 	number2 = 12;
@@ -135,11 +135,22 @@ int	main(void)
 	ft_printf("MY alternatin numbers %d%d%d%d%d%d%d%d%d", number, number2,number, number2, number, number2,number, number2,number);
 	printf("OGalternatin numbers %d%d%d%d%d%d%d%d%d\n", number, number2,number, number2, number, number2,number, number2,number);
 	*/
-	ft_printf("regular: |%s|", str);
-	ft_printf(".5: |%.5s|", str);
-	ft_printf("5: |%5s|", str);
-	ft_printf("25: |%25s|", str);
-
+	
+	
+	//combinations on strings
+	ft_printf("MY 10.5: |%10.5s|", str);
+	printf("OG 10.5: |%10.5s|\n", str);
+	
+	//ft_printf("regular: |%s|", str);
+	ft_printf("MY.5: |%.5s|", str);
+	ft_printf("MY25: |%25s|", str);
+	ft_printf("MY5: |%5s|", str);
+	
+	printf("OG5: |%5s|\n", str);
+	printf("OG25: |%25s|\n", str);
+	printf("OG.5: |%.5s|\n", str);
+	ft_printf("MY -5.5: |%-5.5s|", str);
+	printf("OG -5.5: |%-5.5s|\n", str);
 	//
 
 	/*

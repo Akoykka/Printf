@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 09:23:37 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/14 10:58:19 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/03/16 10:53:19 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int main(void)
 //	printf("test %-.12 12d", i); NOT VALID
 	printf("int is 1234 %- 12.12d\n", i);
 
-
 	printf("int is 1234 %- .d\n", i);
-
+	printf("%10.5");
 	return (0);
 }

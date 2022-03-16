@@ -6,7 +6,7 @@
 #    By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 18:10:03 by akoykka           #+#    #+#              #
-#    Updated: 2022/03/15 10:43:09 by akoykka          ###   ########.fr        #
+#    Updated: 2022/03/16 10:46:10 by akoykka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,3 +36,5 @@ re: fclean all
 
 run:
 	./$(NAME)
+lldb:
+	lldb ./$(NAME)

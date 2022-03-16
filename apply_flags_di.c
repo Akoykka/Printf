@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:15:58 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/15 15:41:48 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/03/16 10:04:23 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@ void	di_apply_space_flag(t_flags *modifiers, int number)
 	int	loop;
 
 	loop = modifiers->space_flag - (int_len(number));
-
 	while (loop-- > 0)
 		ft_putchar(' ');
-
 }
 
 void	di_apply_zero_flag(t_flags *modifiers, int number)
@@ -37,10 +35,8 @@ void	di_apply_zero_flag(t_flags *modifiers, int number)
 	int	loop;
 
 	loop = modifiers->zero_flag - (int_len(number));
-
 	while (loop-- > 0)
 		ft_putchar('0');
-
 }
 
 void di_apply_min_field_width(t_flags *modifiers, int number)
@@ -48,7 +44,6 @@ void di_apply_min_field_width(t_flags *modifiers, int number)
 	int	loop;
 
 	loop = modifiers->min_field_depth - (int_len(number));
-
 	while (loop-- > 0)
 		ft_putchar(' ');
 }
