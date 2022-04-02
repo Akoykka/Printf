@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf_test.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 18:12:57 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/02 17:57:07 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/02 17:59:08 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 # include "./libft/libft.h"
 
 /// MAIN
-//int					main(void);
-int				ft_printf(char *format, ...);
+int					main(void);
 
 void				print_next_parameter(char *format, va_list *va_pointer);
+int				ft_printf(char *format, ...);
 char				*cpy_format(char *format);
 void				conversion_type_table(int index, va_list *va_pointer, char *format);
 void				print_next_parameter(char *format, va_list *va_pointer);

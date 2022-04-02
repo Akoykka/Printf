@@ -6,38 +6,58 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 10:39:51 by akoykka           #+#    #+#             */
-/*   Updated: 2022/03/16 10:15:34 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/02 13:52:34 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*s_apply_decimal_flag(t_flags *modifiers, char *pointer)
+char	*s_apply_precision(char *format, char *string)
 {
-	if (modifiers->decimal_flag > (int)ft_strlen(pointer)
-		|| modifiers->decimal_flag == 0)
-		return (pointer);
-	pointer = ft_strdup(pointer); // possible leak
-	pointer[modifiers->decimal_flag] = '\0';
-	return (pointer);
-}
+	size_t	max_str_len;
+	char	*temp;
+	char	*free_er;
 
-void	s_apply_and_print_minus_flag(t_flags *modifiers, char *pointer)
+	max_str_len = 0;
+	free_er = string;
+	temp = strchr(format, '.');
+	if (temp)
+	{
+		if (ft_isdigit(*(temp + 1)))
+			max_str_len = ft_atoi(temp + 1);
+		string = ft_strndup(string, max_str_len);
+		//ft_strdel(&free_er);
+	}
+	return (string);
+}
+/*
+void	s_apply_and_print_minus_flag(char *format, char *string)
 {	
 	int	loop;
+	int	minus_flag_value;
 
-	loop = modifiers->minus_flag - (int)strlen(pointer);
-	ft_putstr(pointer);
-	while (loop-- > 0)
-		ft_putchar(' ');
+	if (strchr(format, '-'))
+	{
+		minus_flag_value = ft_atoi(strchr(format, '-') + 1);
+		loop = minus_flag_value - (int)strlen(string);
+		ft_putstr(string);
+		while (loop-- > 0)
+			ft_putchar(' ');
+	}
 }
 
-void	s_apply_and_print_width(t_flags *modifiers, char *pointer)
+void	s_apply_and_print_width(char *format, char *string)
 {
 	int	loop;
+	int	print_width_value;
 
-	loop = modifiers->min_field_depth - (int)ft_strlen(pointer);
-	while (loop-- > 0)
-		ft_putchar(' ');
-	ft_putstr(pointer);
+	if (ft_isdigit(format[0])
+	{
+		print_width_value = ft_atoi(&format[0]);
+		loop = print_width_value - (int)ft_strlen(string);
+		while (loop-- > 0)
+			ft_putchar(' ');
+	}	
+	ft_putstr(string);
 }
+*/

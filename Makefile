@@ -6,35 +6,71 @@
 #    By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 18:10:03 by akoykka           #+#    #+#              #
-#    Updated: 2022/03/16 10:46:10 by akoykka          ###   ########.fr        #
+#    Updated: 2022/04/02 17:36:26 by akoykka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = main.c flags.c utils.c apply_flags_di.c conversions.c \
-		apply_flags_s.c
+SRCS_TEST = main.c apply_flags.c conversions.c \
+		apply_flags_s.c get_arg.c padding.c utils.c
 
-NAME = ft_printf
+NAME_TEST = ft_printf_test
 
-CC = clang
+CC_TEST = gcc
 
-FLAGS = -Wall -Werror -Wextra
-FLAGS += -g
+FLAGS_TEST = -Wall -Werror -Wextra
+FLAGS_TEST += -g
 
-INCLUDES = -I . -I libft -L libft -lft
+INCLUDES_TEST = -I . -I libft -L libft -lft
+
+INCLUDES_ = "ft_printf.h"
+
+NAME = libftprintf.a
+
+SRCS = ft_printf.c apply_flags.c conversions.c \
+		apply_flags_s.c get_arg.c padding.c utils.c
+
+
+OBJECTS = ft_printf.o apply_flags.o conversions.o \
+		apply_flags_s.o get_arg.o padding.o utils.o
+
+INCLUDES = "ft_printf.h"
+
 
 all: $(NAME)
 
-$(NAME):
-		$(CC) $(FLAGS) $(SRCS) $(INCLUDES) -o $(NAME)
-clean:
+all1: $(NAME_TEST)
 
-fclean: clean
+$(NAME_TEST):
+	clear
+	$(CC_TEST) $(FLAGS_TEST) $(SRCS_TEST) $(INCLUDES_TEST) -o $(NAME_TEST)
+clean1:
 
-		@rm -f $(NAME)
+fclean1: clean1
 
-re: fclean all
+	@rm -f $(NAME_TEST)
+
+re1: fclean1 all1
 
 run:
-	./$(NAME)
+	./$(NAME_TEST)
 lldb:
-	lldb ./$(NAME)
+	lldb ./$(NAME_TEST)
+
+$(NAME):
+	@gcc -c -Wall -Wextra -Werror $(SRCS) -I $(INCLUDES)
+	@ar rc $(NAME) $(OBJECTS)
+	@ranlib $(NAME)
+	
+clean:
+	@rm -f $(OBJECTS)
+
+fclean: clean
+	@rm -f $(NAME)
+
+re: fclean all
+	
+norm:
+	norminette $(SRCS)
+
+test:
+	./printf_test/run.sh
