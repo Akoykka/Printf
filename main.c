@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 18:10:06 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/02 18:00:44 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/04 19:23:50 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	conversion_type_table(int index, va_list *va_pointer, char *format)
 		unsigned_int_conversion,
 		hexadecimal_conversion,
 		hexadecimal_conversion_uppercase,
-		//float_conversion,
+		float_conversion,
 		percentage_conversion
 	};
 	table[index](va_pointer, format);
@@ -38,7 +38,7 @@ void	print_next_parameter(char *format, va_list *va_pointer)
 	int		i;
 
 	i = 0;
-	ft_strcpy(available_conversions, "cspdiouxX%");
+	ft_strcpy(available_conversions, "cspdiouxXf%");
 	while (available_conversions[i])
 	{
 		if (ft_strchr(format, available_conversions[i]) != NULL)

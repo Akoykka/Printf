@@ -6,12 +6,12 @@
 #    By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 18:10:03 by akoykka           #+#    #+#              #
-#    Updated: 2022/04/02 17:36:26 by akoykka          ###   ########.fr        #
+#    Updated: 2022/04/04 19:23:43 by akoykka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS_TEST = main.c apply_flags.c conversions.c \
-		apply_flags_s.c get_arg.c padding.c utils.c
+		apply_flags_s.c get_arg.c padding.c utils.c floats.c
 
 NAME_TEST = ft_printf_test
 
