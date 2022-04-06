@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 18:12:57 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/04 19:23:42 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/06 16:24:02 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@
 # include <stdarg.h>
 # include "./libft/libft.h"
 
-/// MAIN
-//int					main(void);
-int				ft_printf(char *format, ...);
+
+int					ft_printf(char *format, ...);
 
 void				print_next_parameter(char *format, va_list *va_pointer);
 char				*cpy_format(char *format);
@@ -59,7 +58,14 @@ char				*s_apply_precision(char *format, char *string);
 // Applu Flags for floats
 char				*decimals_to_ascii(long double number);
 char				*float_to_ascii(long double number);
+char				*apply_precision_f(char *format, char *number);
 
+/// ROUNDING FOR FLOATS
+char				*rounding_operation(char *target, char *number);
+char 				*replace_nb_with_rounded_nb(char *number, char *rounded_nb);
+int					rounding_check(char *number);
+int					bankers_rounding(char number);
+int					is_round_nbr(char number);
 
 // PADDINGTON
 char				*align_to_the_left(char *number, int width);

@@ -6,88 +6,11 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 18:10:06 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/04 19:23:50 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/06 16:23:58 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	conversion_type_table(int index, va_list *va_pointer, char *format)
-{
-	typedef void (*conversion_type_table)(va_list *va_pointer, char *format);
-	conversion_type_table table[] =
-	{
-		charecter_conversion,
-		string_conversion,
-		pointer_conversion,
-		decimal_conversion,
-		decimal_conversion,
-		octal_conversion,
-		unsigned_int_conversion,
-		hexadecimal_conversion,
-		hexadecimal_conversion_uppercase,
-		float_conversion,
-		percentage_conversion
-	};
-	table[index](va_pointer, format);
-}
-
-void	print_next_parameter(char *format, va_list *va_pointer)
-{
-	char	available_conversions[12];
-	int		i;
-
-	i = 0;
-	ft_strcpy(available_conversions, "cspdiouxXf%");
-	while (available_conversions[i])
-	{
-		if (ft_strchr(format, available_conversions[i]) != NULL)
-			conversion_type_table(i, va_pointer, format);
-		++i;
-	}
-}
-
-char	*cpy_format(char *format)
-{
-	size_t		i;
-
-	i = 0;
-	while (format[i] && format[i] != 'c' && format[i] != 's'
-		&& format[i] != 'p' && format[i] != 'd' && format[i] != 'i'
-		&& format[i] != 'o' && format[i] != 'u' && format[i] != 'x'
-		&& format[i] != 'X' && format[i] != 'f' && format[i] != '%')
-	{
-		++i;
-	}
-	return (ft_strndup(format, &format[++i] - format));
-}
-
-int	ft_printf(char *format, ...)
-{
-	int		i;
-	va_list	va_pointer;
-	char	*format_cpy;
-
-	i = 0;
-	va_start(va_pointer, format);
-	while (format[i])
-	{
-		if (format[i] == '%')
-		{	
-			++i;
-			format_cpy = cpy_format(&format[i]);
-			i += (int)ft_strlen(format_cpy);
-			print_next_parameter(format_cpy, &va_pointer);
-		}
-		else
-		{
-			write(1, &format[i], 1);
-			++i;
-		}
-	}
-	ft_putchar('\n');
-	return (691337);
-}
 
 int	main(void)
 {
@@ -107,10 +30,16 @@ int	main(void)
 	int zero = 0;
 	int negative = -1;
 
+
+	
+
 	char charry = 120;
 	short int shorty = 3333;;
 	long int 	longy = -212312333;
 	long long int longylongy = 696969696969;
+	
+	
+
 
 	ft_printf("MY|%+010ld|\n", longy);
 
@@ -283,6 +212,31 @@ int	main(void)
 
 	//printf("OG|%+010lld|\n", m);
 	//ft_printf("MY|%+010lld|\n", m);
+
+	
+	float float1;
+
+	float1 = 0.0023456;
+	float float2 = 99.9999999;
+	void *voidpointer;
+
+	voidpointer = NULL;
+
+	ft_printf("MY float %f", float1);
+	printf("OG float %f\n", float1);
+
+	ft_printf("MY float %10f", float1);
+	printf("OG float %10f\n", float1);
+
+	ft_printf("MY float %.5f", float1);
+	printf("OG float %.5f\n", float1);
+
+	ft_printf("MY float %f", float2);
+	printf("OG float %f\n", float2);
+
+	ft_printf("MY p float %10p", voidpointer);
+	printf("OG p float %10p\n", voidpointer);
+
 
 	return (0);
 }

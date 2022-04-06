@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:20:08 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/04 19:23:46 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/06 16:24:00 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,5 @@ long double	get_arg_f(va_list *va_pointer, char *format)
 		return (va_arg(*va_pointer, double));
 	if (ft_strstr(format, "L"))
 		return (va_arg(*va_pointer, long double));
-	return (va_arg(*va_pointer, float));
+	return (va_arg(*va_pointer, double));
 }
