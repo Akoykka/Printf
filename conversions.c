@@ -6,100 +6,127 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 14:29:41 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/06 13:03:32 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/10 00:04:49 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	decimal_conversion(va_list *va_pointer, char *format)
+int	decimal_conversion(t_flags *flags)
 {
 	long long			temp;
 	char				*number;
 
-	temp = get_arg_di(va_pointer, format);
-	number = longlong_to_ascii(temp, DECIMAL_BASE);
-	number = check_plus_flag(format, number);
-	// VANHA PAIKKA CHECK PLUS FLAG TESTAA !
-	//number = check_space_flag(format, number);
-	number = apply_precision(format, number);
-	print_result(format, number);
+	temp = get_arg_di(flags);
+	if (temp < 0)
+	{
+		temp *= -1; // muista min_longlong suojata (ei mahu max longlongiin)
+		flags->negative = 1;
+	}
+	number = base_to_ascii((unsigned long long)temp, DECIMAL_BASE);
+	number = apply_precision(flags, number);
+	if (flags->width > (int)ft_strlen(number))
+		number = pad_width(flags, number);
+	number = apply_space_flag(flags, number);
+	number = apply_plus_flag(flags, number);
+	flags->printf_ret += ft_strlen(number);
+	ft_putstr(number);
+	return (1);
 }
-void	unsigned_int_conversion(va_list *va_pointer, char *format)
+
+
+
+int	unsigned_int_conversion(t_flags *flags)
 {
 	char				*number;
 	unsigned long long	temp;
 
-	temp = get_arg_oux(va_pointer, format);
+	temp = get_arg_oux(flags);
 	number = base_to_ascii(temp, DECIMAL_BASE);
-	number = check_hash_flag(format, number);
-	number = check_plus_flag(format, number);
-	number = check_space_flag(format, number);
-	number = apply_precision(format, number);
-	print_result(format, number);
+	number = apply_hash_flag(flags, number);
+	//number = apply_plus_flag(flags, number);
+	//number = apply_space_flag(flags, number);
+	number = apply_precision(flags, number);
+	print_number(flags, number);
+	flags->printf_ret += ft_strlen(number);
+	ft_putstr(number);
+	return (1);
 }
 
-void	string_conversion(va_list *va_pointer, char *format)
+int	string_conversion(t_flags *flags)
 {
 	char				*string;
 
-	string = va_arg(*va_pointer, char *);
-	string = s_apply_precision(format, string);
-	print_result(format, string);
+	string = va_arg(flags->va_ptr, char *);
+	string = s_apply_precision(flags, string);
+	flags->printf_ret += ft_strlen(string);
+	ft_putstr(string);
+	return (1);
 }
 
-void	octal_conversion(va_list *va_pointer, char *format)
+int	octal_conversion(t_flags *flags)
 {
 	char				*number;
 	unsigned long long	temp;
 
-	temp = get_arg_oux(va_pointer, format);
+	temp = get_arg_oux(flags);
 	number = base_to_ascii(temp, OCTAL_BASE);
-	number = check_hash_flag(format, number);
-	//number = check_plus_flag(format, number);
-	number = check_space_flag(format, number);
-	number = apply_precision(format, number);
-	print_result(format, number);
+	number = apply_hash_flag(flags, number);
+	//number = apply_plus_flag(flags, number);
+	//number = apply_space_flag(flags, number);
+	number = apply_precision(flags, number);
+	flags->printf_ret += ft_strlen(number);
+	ft_putstr(number);
+	return (1);
 }
 
-void	hexadecimal_conversion(va_list *va_pointer, char *format)
+int	hexadecimal_conversion(t_flags *flags)
 {
 	char				*number;
 	unsigned long long	temp;
 
-	temp = get_arg_oux(va_pointer, format);
+	temp = get_arg_oux(flags);
 	number = base_to_ascii(temp, HEXADECIMAL_BASE);
-	number = check_hash_flag(format, number);
-	//number = check_plus_flag(format, number);
-	number = check_space_flag(format, number);
-	number = apply_precision(format, number);
-	print_result(format, number);
+	number = apply_hash_flag(flags, number);
+	//number = apply_plus_flag(flags, number);
+	//number = apply_space_flag(flags, number);
+	number = apply_precision(flags, number);
+	flags->printf_ret += ft_strlen(number);
+	ft_putstr(number);
+	return (1);
 }
 
-void	hexadecimal_conversion_uppercase(va_list *va_pointer, char *format)
+int	hexadecimal_conversion_uppercase(t_flags *flags)
 {
 	char				*number;
 	unsigned long long	temp;
 
-	temp = get_arg_oux(va_pointer, format);
+	temp = get_arg_oux(flags);
 	number = base_to_ascii(temp, HEXADECIMAL_BASE);
-	number = check_hash_flag(format, number);
-	//number = check_plus_flag(format, number);
-	number = check_space_flag(format, number);
-	number = apply_precision(format, number);
+	number = apply_hash_flag(flags, number);
+	//number = apply_plus_flag(flags, number);
+	//number = apply_space_flag(flags, number);
+	number = apply_precision(flags, number);
 	toupper_everything(number);
-	print_result(format, number);
+	flags->printf_ret += ft_strlen(number);
+	ft_putstr(number);
+	return (1);
 }
 
-void	charecter_conversion(va_list *va_pointer, char *format)
+int	charecter_conversion(t_flags *flags)
 {
-	char				temp;
+	unsigned int				temp;
+	char						*number;
 
-	temp = (char)va_arg(*va_pointer, unsigned int);
-	print_result(format, &temp);
+	temp = va_arg(*flags, unsigned int);
+	number = ft_strnew(1);
+	number[0] = temp;
+	flags->printf_ret += ft_strlen(number);
+	ft_putstr(number);
+	return (1);
 }
 
-void	pointer_conversion(va_list *va_pointer, char *format)
+int	pointer_conversion(t_flags *flags)
 {
 	void				*temp;
 	char				*number = NULL;
@@ -107,35 +134,41 @@ void	pointer_conversion(va_list *va_pointer, char *format)
 	char				*free_er;
 
 	free_er = number;
-	temp = va_arg(*va_pointer, void *);
+	temp = va_arg(*flags, void *);
 	number = base_to_ascii((unsigned long long)temp, HEXADECIMAL_BASE);
 	prefix = ft_strnew(2);
 	ft_strcpy(prefix, "0x");
 	number = ft_strjoin(prefix, number);
 	//ft_strdel(&free_er);
 	//ft_strdel(&temp);
-	print_result(format, number);
+	flags->printf_ret += ft_strlen(number);
+	ft_putstr(number);
+	return (1);
 }
-void	percentage_conversion(va_list *va_pointer, char *format)
+int	percentage_conversion(t_flags *flags)
 {
 	char	*percentage;
 
-	(void)va_pointer;
+	(void)flags;
 	percentage = ft_strnew(1);
 	ft_memset(percentage, '%', 1);
-	print_result(format, percentage);
+	flags->printf_ret += ft_strlen(percentage);
+	ft_putstr(percentage);
+	return (1);
 }
 
-void	float_conversion(va_list *va_pointer, char *format)
+int	float_conversion(t_flags *flags)
 {
 	long double	temp;
 	char		*number;
 
-	temp = get_arg_f(va_pointer, format);
+	temp = get_arg_f(flags);
 	number = float_to_ascii(temp);
-	number = check_plus_flag(format, number);
-	number = apply_precision_f(format, number);
-	print_result(format, number);
+	number = apply_plus_flag(flags, number);
+	number = apply_precision_f(flags, number);
+	flags->printf_ret += ft_strlen(number);
+	ft_putstr(number);
+	return (1);
 }
 
 // Muuta arvo

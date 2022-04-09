@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 18:10:06 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/06 16:23:58 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/09 19:38:47 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(void)
 	int	l = 1234;
 	int	m = 12345;
 	int	n = 123456;
-
 	int zero = 0;
 	int negative = -1;
 
@@ -39,8 +38,7 @@ int	main(void)
 	long long int longylongy = 696969696969;
 	
 	
-
-
+	ft_printf("% -1.5d\n", zero);
 	ft_printf("MY|%+010ld|\n", longy);
 
 	printf("\n Zero with + sign\n\n");
@@ -149,17 +147,6 @@ int	main(void)
 	printf("OG -5.5: |%-5.5s|\n", str);
 
 
-	ft_putchar('\n');
-	printf("\nOG this is a text %d\n", number);
-	ft_putchar('\n');
-	ft_printf("MY this is a text %d", number);
-	ft_putchar('\n');
-	printf("OG this is a text %d", number);
-	ft_putchar('\n');
-	ft_printf("MY this is a text %d", number);
-	ft_putchar('\n');
-	printf("OG this is a text %d", number);
-	ft_putchar('\n');
 
 	printf("\nOG5: 111 number min_width 5o\n");
 	printf("OG5: |%5o|\n", number);

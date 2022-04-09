@@ -6,13 +6,13 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 12:10:14 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/06 16:24:01 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/10 00:04:41 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*check_hash_flag(char *format, char *number)
+char	*apply_hash_flag(t_flags *flags char *number)
 {
 	char	*temp;
 	char	*free_er;
@@ -22,16 +22,16 @@ char	*check_hash_flag(char *format, char *number)
 	{
 		temp = ft_strnew(2);
 		ft_memset(temp, '\0', 2);
-		if ((ft_strchr(format, 'X') || ft_strchr(format, 'x'))
+		if (flags->conversion_type == 7 || flags->conversion_type == 8
 			&& *number != 0)
 		{
 			ft_strcpy(temp, "0x");
 			number = ft_strjoin(temp, number);
 			//ft_strdel(&free_er);
 		}
-		if (ft_strchr(format, 'o') && *number != '0')
+		if (flags->conversion_type == 5 && *number != '0')
 		{
-			temp[0] = '0';
+			temp[0] = '0'; 
 			number = ft_strjoin(temp, number);
 			//ft_strdel(&free_er);
 		}
@@ -40,13 +40,13 @@ char	*check_hash_flag(char *format, char *number)
 	return (number);
 }
 
-char	*check_plus_flag(char *format, char *number)
+char	*apply_plus_flag(t_flags *flags, char *number)
 {
 	char	*temp;
 	char	*free_er;
 
 	free_er = number;
-	if (*format == '+' && *number != '-')
+	if (flags->plus && !flags->negative)
 	{
 		temp = ft_strnew(1);
 		ft_memset(temp, '+', 1);
@@ -57,58 +57,55 @@ char	*check_plus_flag(char *format, char *number)
 	return (number);
 }
 
-char	*check_space_flag(char *format, char *number)
+char	*apply_space_flag(t_flags *flags, char *number)
 {
-	if (ft_strchr(format, ' ') && !ft_strchr(format, '+'))
-		align_to_the_right(number, 1);
+	if (flags->space
+		&& !flags->plus
+		&& !flags->negative
+		&& !is_number_just_space(number))
+		number = align_to_the_right(number, 1);
 	return (number);
 }
 
-char	*apply_precision(char *format, char *number)
+int is_value_zero(char *number)
+{
+	while (*number)
+	{
+		if (*number != '0' && *number != ' ')
+			return (0);
+		++number;
+	}
+	return (1);
+}
+
+
+
+char	*apply_precision(t_flags *flags, char *number)
 {
 	char	*temp;
-	int		precision;
 
-	precision = 0;
-	temp = ft_strchr(format, '.');
-	if (temp)
+	if (flags->precision)
 	{
-		if (ft_isdigit(*(temp + 1)))
-			precision = ft_atoi(temp + 1);
-	}
-	if (precision > (int)ft_strlen(number))
-	{
-		precision -= (int)ft_strlen(number);
-		number = pad_with_zeroes(number, precision);
+		if (!flags->prec_val && is_value_zero(number))
+			return (ft_memset(number, '\0', ft_strlen(number)));
+		if (flags->prec_val > (int)ft_strlen(number))
+		{
+		flags->prec_val -= (int)ft_strlen(number);
+		number = pad_with_zeroes(number, flags->prec_val);
+		}
 	}
 	return (number);
 }
 
-int	get_min_width_value(char *format)
+char	*s_apply_precision(t_flags *flags, char *string)
 {
-	while (*format != '.' && *format)
-	{
-		if (ft_isdigit(*format))
-			return (ft_atoi(format));
-		++format;
-	}
-	return (0);
-}
-
-char	*s_apply_precision(char *format, char *string)
-{
-	size_t	max_str_len;
-	char	*temp;
 	char	*free_er;
-
-	max_str_len = 0;
+	
 	free_er = string;
-	temp = strchr(format, '.');
-	if (temp)
+	if (flags->precision)
 	{
-		if (ft_isdigit(*(temp + 1)))
-			max_str_len = ft_atoi(temp + 1);
-		string = ft_strndup(string, max_str_len);
+		if (flags->prec_val < ft_strlen(string))
+		string = ft_strndup(string, flags->prec_val);
 		//ft_strdel(&free_er);
 	}
 	return (string);

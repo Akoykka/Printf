@@ -6,45 +6,36 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:56:28 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/06 14:53:40 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/10 00:04:47 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	conversion_type_table(int index, va_list *va_pointer, char *format)
+void	dispatch_table(t_flags *flags)
 {
-	typedef void (*conversion_type_table)(va_list *va_pointer, char *format);
-	conversion_type_table table[] =
-	{
-		charecter_conversion,
-		string_conversion,
-		pointer_conversion,
-		decimal_conversion,
-		decimal_conversion,
-		octal_conversion,
-		unsigned_int_conversion,
-		hexadecimal_conversion,
-		hexadecimal_conversion_uppercase,
-		float_conversion,
-		percentage_conversion
-	};
-	table[index](va_pointer, format);
-}
-
-void	print_next_parameter(char *format, va_list *va_pointer)
-{
-	char	available_conversions[12];
-	int		i;
-
-	i = 0;
-	ft_strcpy(available_conversions, "cspdiouxXf%");
-	while (available_conversions[i])
-	{
-		if (ft_strchr(format, available_conversions[i]) != NULL)
-			conversion_type_table(i, va_pointer, format);
-		++i;
-	}
+	if (flags->conversion_type == 0 && charecter_conversion(flags))
+		return ;
+	if (flags->conversion_type == 1 && string_conversion(flags))
+		return ;
+	if (flags->conversion_type == 2 && pointer_conversion(flags))
+		return ;
+	if (flags->conversion_type == 3 && decimal_conversion(flags))
+		return ;
+	if (flags->conversion_type == 4 && decimal_conversion(flags))
+		return ;
+	if (flags->conversion_type == 5 && octal_conversion(flags))
+		return ;
+	if (flags->conversion_type == 6 && unsigned_int_conversion(flags))
+		return ;
+	if (flags->conversion_type == 7 && hexadecimal_conversion(flags))
+		return ;
+	if (flags->conversion_type == 8 && hexadecimal_conversion_uppercase(flags))
+		return ;
+	if (flags->conversion_type == 9 && float_conversion(flags))
+		return ;
+	if (flags->conversion_type == 10 && percentage_conversion(flags))
+		return ;
 }
 
 char	*cpy_format(char *format)
@@ -56,35 +47,33 @@ char	*cpy_format(char *format)
 		&& format[i] != 'p' && format[i] != 'd' && format[i] != 'i'
 		&& format[i] != 'o' && format[i] != 'u' && format[i] != 'x'
 		&& format[i] != 'X' && format[i] != 'f' && format[i] != '%')
-	{
 		++i;
-	}
 	return (ft_strndup(format, &format[++i] - format));
 }
 
-int	ft_printf(char *format, ...)
+int	ft_printf(const char *format, ...)
 {
 	int		i;
-	va_list	va_pointer;
-	char	*format_cpy;
+	t_flags	*flags;
 
 	i = 0;
-	va_start(va_pointer, format);
+	flags = (t_flags *)ft_memalloc(sizeof(t_flags));
+	flags->printf_ret = 0;
+	va_start(*flags->va_ptr, format);
 	while (format[i])
 	{
 		if (format[i] == '%')
 		{	
 			++i;
-			format_cpy = cpy_format(&format[i]);
-			i += (int)ft_strlen(format_cpy);
-			print_next_parameter(format_cpy, &va_pointer);
-		}
+			i += get_flag_values(cpy_format((char *)&format[i]), flags);
+			dispatch_table(flags);
+		}	
 		else
 		{
 			write(1, &format[i], 1);
+			flags->printf_ret++;
 			++i;
 		}
 	}
-	ft_putchar('\n');
-	return (691337);
+	return (flags->printf_ret);
 }

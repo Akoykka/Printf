@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 18:12:57 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/06 16:24:02 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/10 00:04:46 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,67 +25,78 @@
 # include "./libft/libft.h"
 
 
-int					ft_printf(char *format, ...);
+typedef struct s_flags
+{
+	int		plus;
+	int		minus;
+	int		space;
+	int		zero;
+	int		hash;
+	int		width;
+	int		precision;
+	int		prec_val;
+	int		negative;
+	int		ll;
+	int		l;
+	int		h;
+	int		hh;
+	int		printf_ret;
+	int		conversion_type;
+	va_list	*va_ptr;
+}				t_flags;
 
-void				print_next_parameter(char *format, va_list *va_pointer);
+
+int					ft_printf(const char *format, ...);
+
 char				*cpy_format(char *format);
-void				conversion_type_table(int index, va_list *va_pointer, char *format);
-void				print_next_parameter(char *format, va_list *va_pointer);
+void				dispatch_table(t_flags *flags);
 
 // get type type
-long long			get_arg_di(va_list *va_pointer, char *format);
-unsigned long long	get_arg_oux(va_list *va_pointer, char *format);
-long double			get_arg_f(va_list *va_pointer, char *format);
+long long			get_arg_di(t_flags *flags);
+unsigned long long	get_arg_oux(t_flags *flags);
+long double			get_arg_f(t_flags *flags);
 
 // conversion functions
-void				decimal_conversion(va_list *va_pointer, char *format);
-void				string_conversion(va_list *va_pointer, char *format);
-void				octal_conversion(va_list *va_pointer, char *format);
-void				hexadecimal_conversion(va_list *va_pointer, char *format);
-void				charecter_conversion(va_list *va_pointer, char *format);
-void				percentage_conversion(va_list *va_pointer, char *format);
-void				pointer_conversion(va_list *va_pointer, char *format);
-void				hexadecimal_conversion_uppercase(va_list *va_pointer, char *format);
-void				unsigned_int_conversion(va_list *va_pointer, char *format);
-void				float_conversion(va_list *va_pointer, char *format);
+int					decimal_conversion(t_flags *flags);
+int					string_conversion(t_flags *flags);
+int					octal_conversion(t_flags *flags);
+int					hexadecimal_conversion(t_flags *flags);
+int					charecter_conversion(t_flags *flags);
+int					percentage_conversion(t_flags *flags);
+int					pointer_conversion(t_flags *flags);
+int					hexadecimal_conversion_uppercase(t_flags *flags);
+int					unsigned_int_conversion(t_flags *flags);
+int					float_conversion(t_flags *flags);
 
 // apply flags
-char				*check_hash_flag(char *format, char *number);
-char				*check_plus_flag(char *format, char *number);
-char				*check_space_flag(char *format, char *number);
-char				*apply_precision(char *format, char *number);
-char				*s_apply_precision(char *format, char *string);
-// Applu Flags for floats
+char				*apply_hash_flag(t_flags *flags, char *number);
+char				*apply_plus_flag(t_flags *flags, char *number);
+char				*apply_space_flag(t_flags *flags, char *number);
+char				*apply_precision(t_flags *flags, char *number);
+char				*s_apply_precision(t_flags *flags, char *string);
+// Apply Flags for floats
 char				*decimals_to_ascii(long double number);
 char				*float_to_ascii(long double number);
-char				*apply_precision_f(char *format, char *number);
+char				*apply_precision_f(t_flags *flags, char *number);
 
 /// ROUNDING FOR FLOATS
 char				*rounding_operation(char *target, char *number);
-char 				*replace_nb_with_rounded_nb(char *number, char *rounded_nb);
+char				*replace_nb_with_rounded_nb(char *number, char *rounded_nb);
 int					rounding_check(char *number);
 int					bankers_rounding(char number);
 int					is_round_nbr(char number);
 
 // PADDINGTON
-char				*align_to_the_left(char *number, int width);
-char				*align_to_the_right(char *number, int width);
-char				*pad_with_zeroes(char *number, int width);
-char				*pad_width(char *format, char *number, int width);
-///// utils PADDINTON
-int					get_min_width_value(char *format);
-int					first_digit_is_zero(char *format);
-
+char				*align_to_the_left(char *number, t_flags *flags);
+char				*align_to_the_right(char *number, t_flags *flags);
+char				*pad_with_zeroes(char *number, t_flags *flags);
+char				*pad_width(char *number, t_flags *flags);
 // apply flags string
 char				*s_apply_decimal_flag(char *pointer);
-void				s_apply_and_print_minus_flag(char *pointer);
-void				s_apply_and_print_width(char *pointer);
 
 /// UTILS
-void				print_result(char *format, char *result);
 char				*base_to_ascii(unsigned long long number, int base);
 char				number_to_char(unsigned long long number);
-char				longlong_to_char(long long number);
-char				*longlong_to_ascii(long long number, int base);
 void				toupper_everything(char *number);
+int					is_number_just_space(char *number);
 #endif
