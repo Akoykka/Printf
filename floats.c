@@ -6,47 +6,11 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 14:24:42 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/06 16:24:05 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/11 17:09:41 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-char	*decimals_to_ascii(long double number)
-{
-	char	*decimals;
-	int		loop;
-
-	loop = 39;
-	decimals = ft_strnew(41 + 1);
-	ft_memset(decimals, '\0', 42);
-	ft_memset(decimals, '.', 1);
-	if (number < 0)
-		number *= -1;
-	
-	while (loop--)
-	{
-	number -= (long long)number;
-	number *= 10;
-	decimals[ft_strlen(decimals)] = (long long)number + '0';
-	}
-	return (decimals);
-}
-char	*float_to_ascii(long double number)
-{	
-	char	*before_decimal;
-	char	*decimals;
-	//char	*free_er;
-
-	//free_er = before_decimal;
-	before_decimal = longlong_to_ascii((long long)number, DECIMAL_BASE);
-	decimals = decimals_to_ascii(number);
-	before_decimal = ft_strjoin(before_decimal, decimals);
-	//ft_strdel(&free_er);
-	//ft_strdel(decimals);
-	return(before_decimal);
-}
-
 
 int	is_round_nbr(char number)
 {
@@ -74,10 +38,10 @@ int	rounding_check(char *number)
 	return (NO_ROUNDING);
 }
 
-char *replace_nb_with_rounded_nb(char *number, char *rounded_nb)
+char	*replace_nb_with_rounded_nb(char *number, char *rounded_nb)
 {
-	char *temp;
-	char *free_er;
+	char	*temp;
+	char	*free_er;
 
 	free_er = number;
 	temp = ft_strchr(number, '.');
@@ -92,7 +56,7 @@ char	*rounding_operation(char *target, char *number)
 {
 	int		temp;
 	char	*rounded_nb;
-	char 	*decimal_before_target;
+	char	*decimal_before_target;
 
 	if (*target == '.')
 	{
@@ -112,31 +76,57 @@ char	*rounding_operation(char *target, char *number)
 	return (number);
 }
 
-char	*apply_precision_f(char *format, char *number)
+char	*apply_precision_f(t_flags *flags, char *number)
 {
 	char	*temp;
 	int		precision;
 
 	precision = 6;
-	temp = ft_strchr(format, '.');
-	if (temp)
-	{
-		if (ft_isdigit(*(temp + 1)))
-			precision = ft_atoi(temp + 1);
-		else
-			precision = 0;
-	}
+	if (flags->precision)
+		precision = flags->prec_val;
 	temp = (ft_strchr(number, '.') + precision);
 	if (rounding_check(temp) == ROUND_UP)
 		number = rounding_operation(temp, number);
-	if (*temp == '.')
-		*temp = '\0';
-	else
 		*(temp + 1) = '\0';
 	return (number);
 }
-/*
-0.4445
+char	*decimals_to_ascii(long double number)
+{
+	char	*decimals;
+	int		loop;
+
+	loop = 39;
+	decimals = ft_strnew(41 + 1);
+	ft_memset(decimals, '\0', 42);
+	ft_memset(decimals, '.', 1);
+	while (loop--)
+	{
+	number -= (long long)number;
+	number *= 10;
+	decimals[ft_strlen(decimals)] = (long long)number + '0';
+	}
+	return (decimals);
+}
+
+char	*float_to_ascii(t_flags *flags, long double number)
+{	
+	char	*before_decimal;
+	char	*decimals;
+	//char	*free_er;
+	//free_er = before_decimal;
+	if (number < 0)
+	{
+		flags->negative = 1;
+		number *= -1;
+	}
+	before_decimal = base_to_ascii((unsigned long long)number, DECIMAL_BASE);
+	decimals = decimals_to_ascii(number);
+	before_decimal = ft_strjoin(before_decimal, decimals);
+	//ft_strdel(&free_er);
+	//ft_strdel(decimals);
+	return(before_decimal);
+}
+/*0.4445
 
 0.4446
 

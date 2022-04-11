@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:05:55 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/09 21:58:42 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/11 18:34:10 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	toupper_everything(char *number)
 {
 	while (*number)
 	{
-		ft_toupper(*number);
+		*number = ft_toupper(*number);
 		++number;
 	}
 }

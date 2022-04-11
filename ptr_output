@@ -1,0 +1,36 @@
+testing test_pointer %p '0x7ffee6c687a8'
+ret is 41
+testing &test_value %p '0x7ffee6c687a8'
+ret is 40
+testing test_pointer %p '0x7ffee6c687a8'
+ret is 41
+testing test_pointer %p '0x7ffee6c687a8'
+ret is 41
+testing test_pointer %p '0x7ffee6c687a8'
+ret is 41
+testing test_pointer %p '0x7ffee6c687a8'
+ret is 41
+testing test_pointer %p '0x0'
+ret is 30
+testing test_pointer %p '0x0'
+ret is 30
+testing test_pointer %p '0x0'
+ret is 30
+testing test_pointer %p '0x7ffee6c687a8'
+ret is 41
+testing &test_value %p '0x7ffee6c687a8'
+ret is 40
+testing test_pointer %p '      0x7ffee6c687a8'
+ret is 47
+testing test_pointer %p '                                                                                                                                                                                          0x7ffee6c687a8'
+ret is 227
+testing test_pointer %p '0x7ffee6c687a8      '
+ret is 47
+testing test_pointer %p '0x7ffee6c687a8'
+ret is 41
+testing test_pointer %p '0x0'
+ret is 30
+testing test_pointer %p '0x0                 '
+ret is 47
+testing test_pointer %p '  0x0'
+ret is 32

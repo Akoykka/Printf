@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:56:28 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/10 00:04:47 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/11 16:21:27 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,21 @@
 
 void	dispatch_table(t_flags *flags)
 {
-	if (flags->conversion_type == 0 && charecter_conversion(flags))
-		return ;
-	if (flags->conversion_type == 1 && string_conversion(flags))
-		return ;
-	if (flags->conversion_type == 2 && pointer_conversion(flags))
-		return ;
-	if (flags->conversion_type == 3 && decimal_conversion(flags))
-		return ;
-	if (flags->conversion_type == 4 && decimal_conversion(flags))
-		return ;
-	if (flags->conversion_type == 5 && octal_conversion(flags))
-		return ;
-	if (flags->conversion_type == 6 && unsigned_int_conversion(flags))
-		return ;
-	if (flags->conversion_type == 7 && hexadecimal_conversion(flags))
-		return ;
-	if (flags->conversion_type == 8 && hexadecimal_conversion_uppercase(flags))
-		return ;
-	if (flags->conversion_type == 9 && float_conversion(flags))
-		return ;
-	if (flags->conversion_type == 10 && percentage_conversion(flags))
-		return ;
+	static const t_dispatch_table	dispatch_table[12] = {
+		charecter_conversion,
+		string_conversion,
+		pointer_conversion,
+		decimal_conversion,
+		decimal_conversion,
+		unsigned_int_conversion,
+		octal_conversion,
+		hexadecimal_conversion,
+		hexadecimal_conversion,
+		float_conversion,
+		percentage_conversion
+	};
+
+	dispatch_table[flags->conversion_type](flags);
 }
 
 char	*cpy_format(char *format)
@@ -55,11 +48,13 @@ int	ft_printf(const char *format, ...)
 {
 	int		i;
 	t_flags	*flags;
+	va_list	list;
 
 	i = 0;
 	flags = (t_flags *)ft_memalloc(sizeof(t_flags));
 	flags->printf_ret = 0;
-	va_start(*flags->va_ptr, format);
+	va_start(list, format);
+	flags->va_ptr = &list;
 	while (format[i])
 	{
 		if (format[i] == '%')

@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 13:18:07 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/06 13:03:31 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/11 13:59:55 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,3 +30,9 @@ int main(void)
 	printf("number is %.20f\n", number1);
 	printf("number is %.40f\n", number1);
 }
+/*
+CFLAGS="-Wall -Wextra -Werror"  #-fsanitize=address" #compiler flags
+#CFLAGS="-g"
+INCLUDES="-I." #ft_printf.h location
+LDFLAGS="-L. -lftprintf -L./libft/ -lft"
+*/
