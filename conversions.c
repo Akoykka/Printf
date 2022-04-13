@@ -6,11 +6,30 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 14:29:41 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/11 19:53:20 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/13 10:40:08 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+
+char *add_minus(char *number)
+{
+	char	*minus;
+	char	*free_er;
+
+	minus = ft_strdup("-");
+	free_er = number;
+
+	number = ft_strjoin(minus, number);
+	//ft_strdel(minus);
+	//ft_strdel(free_er);
+
+
+	return (number);
+}
+
+
 
 void	decimal_conversion(t_flags *flags)
 {
@@ -28,9 +47,12 @@ void	decimal_conversion(t_flags *flags)
 	number = apply_space_flag(flags, number);
 	number = apply_plus_flag(flags, number);
 	if (flags->width > (int)ft_strlen(number))
-		number = pad_width(flags, number);	
+		number = pad_width(flags, number);
+	//if (flags->negative)
+		//number = add_minus(number);
 	flags->printf_ret += ft_strlen(number);
 	ft_putstr(number);
+	ft_strdel(&number);
 }
 
 void	unsigned_int_conversion(t_flags *flags)
@@ -44,9 +66,11 @@ void	unsigned_int_conversion(t_flags *flags)
 	//number = apply_plus_flag(flags, number);
 	//number = apply_space_flag(flags, number);
 	number = apply_precision(flags, number);
+	if (flags->width > (int)ft_strlen(number))
+		number = pad_width(flags, number);
 	flags->printf_ret += ft_strlen(number);
 	ft_putstr(number);
-	//return (1);
+	ft_strdel(&number);
 }
 
 void	string_conversion(t_flags *flags)
@@ -54,10 +78,20 @@ void	string_conversion(t_flags *flags)
 	char				*string;
 
 	string = va_arg(*(flags->va_ptr), char *);
+	if (string == NULL)
+	{
+		ft_putstr("(null)");
+		flags->printf_ret += 6;
+		return ;
+	}
+	string = ft_strdup(string);
 	string = s_apply_precision(flags, string);
+
+	if (flags->width > (int)ft_strlen(string))
+		string = pad_width(flags, string);
 	flags->printf_ret += (int)ft_strlen(string);
 	ft_putstr(string);
-	//return (1);
+	ft_strdel(&string);
 }
 
 void	octal_conversion(t_flags *flags)
@@ -67,15 +101,15 @@ void	octal_conversion(t_flags *flags)
 
 	temp = get_arg_oux(flags);
 	number = base_to_ascii(temp, OCTAL_BASE);
-	number = apply_hash_flag_oct(flags, number);
 	//number = apply_plus_flag(flags, number); ei toimi
 	//number = apply_space_flag(flags, number); ei toimi
 	number = apply_precision(flags, number);
+	number = apply_hash_flag_oct(flags, number);
 	if (flags->width > (int)ft_strlen(number))
 		number = pad_width(flags, number);
 	flags->printf_ret += ft_strlen(number);
 	ft_putstr(number);
-	//return (1);
+	ft_strdel(&number);
 }
 
 void	hexadecimal_conversion(t_flags *flags)
@@ -85,10 +119,11 @@ void	hexadecimal_conversion(t_flags *flags)
 
 	temp = get_arg_oux(flags);
 	number = base_to_ascii(temp, HEXADECIMAL_BASE);
-	number = apply_hash_flag(flags, number);
+
 	//number = apply_plus_flag(flags, number);
 	//number = apply_space_flag(flags, number);
 	number = apply_precision(flags, number);
+	number = apply_hash_flag(flags, number);
 	if (flags->width > (int)ft_strlen(number))
 		number = pad_width(flags, number);
 	//if (!is_number_just_space(number))
@@ -97,40 +132,47 @@ void	hexadecimal_conversion(t_flags *flags)
 	if (flags->conversion_type == HEX_UPPER)
 		toupper_everything(number);
 	ft_putstr(number);
-	//return (1);
+	ft_strdel(&number);
 }
 
 void	charecter_conversion(t_flags *flags)
 {
-	unsigned int				temp;
+	int							temp;
 	char						*number;
 
-	temp = va_arg(*(flags->va_ptr), unsigned int);
-	number = ft_strnew(1);
-	number[0] = temp;
+	temp = va_arg(*(flags->va_ptr), int);
+	number = ft_strnew(2);
+	if (temp == '\0')
+	{
+		ft_strcpy(number, "^@");
+		flags->printf_ret--;
+		flags->width++;
+	}
+	else
+		number[0] = temp;
+	if (flags->width > (int)ft_strlen(number))
+		number = pad_width(flags, number);
 	flags->printf_ret += ft_strlen(number);
 	ft_putstr(number);
-	//return (1);
+	ft_strdel(&number);
 }
 
 void	pointer_conversion(t_flags *flags)
 {
 	void				*temp;
-	char				*number = NULL;
-	char				*prefix;
+	char				*number;
+	char				prefix[3];
 	char				*free_er;
 
-	free_er = number;
 	temp = va_arg(*(flags->va_ptr), void *);
 	number = base_to_ascii((unsigned long long)temp, HEXADECIMAL_BASE);
-	prefix = ft_strnew(2);
+	free_er = number;
 	ft_strcpy(prefix, "0x");
 	number = ft_strjoin(prefix, number);
-	//ft_strdel(&free_er);
-	//ft_strdel(&temp);
+	ft_strdel(&free_er);
 	flags->printf_ret += ft_strlen(number);
 	ft_putstr(number);
-	//return (1);
+	ft_strdel(&number);
 }
 void	percentage_conversion(t_flags *flags)
 {
@@ -143,7 +185,7 @@ void	percentage_conversion(t_flags *flags)
 		percentage = pad_width(flags, percentage);
 	flags->printf_ret += ft_strlen(percentage);
 	ft_putstr(percentage);
-	//return (1);
+	ft_strdel(&percentage);
 }
 
 void	float_conversion(t_flags *flags)
@@ -157,36 +199,5 @@ void	float_conversion(t_flags *flags)
 	number = apply_precision_f(flags, number);
 	flags->printf_ret += ft_strlen(number);
 	ft_putstr(number);
-	//return (1);
+	ft_strdel(&number);
 }
-
-// Muuta arvo
-
-
-
-
-
-/*
-muuta arvo hexadecimaaliksi niin se nayttaa osoittteen.
-if precision then no zero flag 
-
-//	if minus flag no zero flag
-
-// if plus no space flag
-
-# works with 
-s
-First + or - or # 0 flag must be after that
-
-width must be before preciesion
-
-precision comes last.
-
-
-
-first apply precision 
-
-then apply + or space
-
-calculate width and apply - 0 or none flag
-*/

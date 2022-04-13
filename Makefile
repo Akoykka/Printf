@@ -6,7 +6,7 @@
 #    By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 18:10:03 by akoykka           #+#    #+#              #
-#    Updated: 2022/04/11 18:25:08 by akoykka          ###   ########.fr        #
+#    Updated: 2022/04/13 09:45:20 by akoykka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRCS = ft_printf.c apply_flags.c conversions.c \
 		libft/ft_putstr.c libft/ft_strchr.c libft/ft_strcpy.c \
 		libft/ft_strjoin.c libft/ft_strlen.c libft/ft_strndup.c \
 		libft/ft_strnew.c libft/ft_strstr.c libft/ft_toupper.c \
-		libft/ft_strncpy.c libft/ft_strcat.c
+		libft/ft_strncpy.c libft/ft_strcat.c libft/ft_strdup.c \
+		libft/ft_strdel.c
 
 FLAGS = -c -Wall -Werror -Wextra -g
 
@@ -34,7 +35,7 @@ OBJECTS = ft_printf.o apply_flags.o conversions.o \
 		ft_putstr.o ft_strchr.o ft_strcpy.o \
 		ft_strjoin.o ft_strlen.o ft_strndup.o \
 		ft_strnew.o ft_strstr.o ft_toupper.o \
-		ft_strncpy.o ft_strcat.o
+		ft_strncpy.o ft_strcat.o ft_strdup.o ft_strdel.o
 
 NAME_TEST = ft_printf_test
 

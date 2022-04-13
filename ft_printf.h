@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 18:12:57 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/11 17:09:32 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/12 16:25:09 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ char				*pad_width(t_flags *flags, char *number);
 char				*s_apply_decimal_flag(char *pointer);
 
 /// UTILS
+char				*add_minus(char *number);
 char				*base_to_ascii(unsigned long long number, int base);
 char				number_to_char(unsigned long long number);
 void				toupper_everything(char *number);

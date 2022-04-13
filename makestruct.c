@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 20:18:23 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/11 16:21:11 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/13 10:09:25 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	set_rest_flag_values(char *format, t_flags *flags)
 		flags->hash = 1;
 	while (*format != '.' && *format)
 	{
-		if (ft_isdigit(*format))
+		if (ft_isdigit(*format) && *format != '0')
 		{
 			flags->width = ft_atoi(format);
 			return ;
@@ -94,7 +94,7 @@ void	set_lenght_and_conversion_flags(char *format, t_flags *flags)
 }
 
 int	get_flag_values(char *format, t_flags *flags)
-{	
+{
 	int	format_lenght;
 
 	format_lenght = ft_strlen(format);
@@ -102,6 +102,6 @@ int	get_flag_values(char *format, t_flags *flags)
 	set_lenght_and_conversion_flags(format, flags);
 	set_zero_flag(format, flags);
 	set_rest_flag_values(format, flags);
-	//free(&format);
+	ft_strdel(&format);
 	return (format_lenght);
 }

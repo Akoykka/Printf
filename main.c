@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 18:10:06 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/11 18:43:54 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/13 11:27:47 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(void)
 	char	str[] = "TESTSTRING";
 	number2 = 12;
 	number = 111;
-	
+
 	int	i = 1;
 	int	j = 12;
 	int	k = 123;
@@ -30,15 +30,18 @@ int	main(void)
 	int negative = -1;
 
 
-	
+
 
 	char charry = 120;
 	short int shorty = 3333;;
 	long int 	longy = -212312333;
 	long long int longylongy = 696969696969;
-	
+
+	ft_printf("%.2s is a string", "");
+	ft_printf("%.2c", NULL);
+	ft_printf("%0+5d", -42);
 	ft_printf("%10s is a string", "this");
-	
+
 	printf("#4.3x\n");
 	printf("OG: |%#4.3x|\n", number2);
 	ft_printf("MY: |%#4.3x|\n\n", number2);
@@ -81,10 +84,10 @@ int	main(void)
 	printf("OG25: |%025x|\n", number2);
 	ft_printf("MY25: |%025x|\n", number2);
 
-	
 
-	
-	/*
+
+
+
 	printf("\n 111 number  #-5o\n");
 	printf("OG -5: |%#-5o|\n", number);
 	ft_printf("MY -5: |%#-5o|\n", number);
@@ -96,7 +99,7 @@ int	main(void)
 	printf("\n 111 number 10.3#o\n");
 	printf("OG -5: |%#10.3o|\n", number);
 	ft_printf("MY -5: |%#10.3o|\n", number);
-	
+
 	printf("\n 111 number min_width 5o\n");
 	printf("OG5: |%5o|\n", number);
 	ft_printf("MY5: |%5o|", number);
@@ -117,9 +120,9 @@ int	main(void)
 	printf("OG -5: |%-5o|\n", number);
 	ft_printf("MY -5: |%-5o|\n", number);
 
-	
 
-	
+
+
 	printf("\n\n+ and Zeros (10)\n\n");
 	printf("OG|%+010d|\n", i);
 	ft_printf("MY|%+010d|\n", i);
@@ -216,12 +219,12 @@ int	main(void)
 	//combinations on strings
 	ft_printf("MY 10.5: |%10.5s|\n", str);
 	printf("OG 10.5: |%10.5s|\n", str);
-	
+
 	//ft_printf("regular: |%s|", str);
 	ft_printf("MY.5: |%.5s|\n", str);
 	ft_printf("MY25: |%25s|\n", str);
 	ft_printf("MY5: |%5s|\n", str);
-	
+
 	printf("OG5: |%5s|\n", str);
 	printf("OG25: |%25s|\n", str);
 	printf("OG.5: |%.5s|\n", str);
@@ -230,7 +233,7 @@ int	main(void)
 
 
 
-	
+
 	printf("\nhexadecimals \n");
 	printf("OG25: |%025x|\n", number);
 	ft_printf("MY25: |%025x|\n", number);
@@ -263,7 +266,7 @@ int	main(void)
 	//printf("OG|%+010lld|\n", m);
 	//ft_printf("MY|%+010lld|\n", m);
 
-	
+
 	float float1;
 
 	float1 = 0.0023456;
@@ -287,6 +290,6 @@ int	main(void)
 	ft_printf("MY p float %10p\n", voidpointer);
 	printf("OG p float %10p\n", voidpointer);
 
-*/
+
 	return (0);
 }

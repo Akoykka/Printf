@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:20:08 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/11 13:41:33 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/12 20:04:08 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ long long	get_arg_di(t_flags *flags)
 	if (flags->h)
 		return (va_arg(*(flags->va_ptr), int));
 	if (flags->ll)
-		return (va_arg(*(flags->va_ptr), signed long long));
+		return (va_arg(*(flags->va_ptr), long long));
 	if (flags->l)
-		return (va_arg(*(flags->va_ptr), signed long));
-	return (va_arg(*(flags->va_ptr), signed int));
+		return (va_arg(*(flags->va_ptr), long));
+	return (va_arg(*(flags->va_ptr), int));
 }
 
 unsigned long long	get_arg_oux(t_flags *flags)
