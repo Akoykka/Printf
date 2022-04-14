@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 19:04:37 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/13 11:19:57 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/14 18:32:45 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,16 +87,18 @@ char	*align_to_the_left(char *number, int width)
 
 char	*pad_width(t_flags *flags, char *number)
 {
-	flags->width -= ft_strlen(number);
+	int	total_width;
+
+	total_width = flags->width - ft_strlen(number);
 
 	if (flags->minus)
-		number = align_to_the_left(number, flags->width);
+		number = align_to_the_left(number, total_width);
 	else
 	{
 		if (flags->zero && (!flags->precision && !flags->prec_val))
-			number = pad_with_zeroes(number, flags->width);
+			number = pad_with_zeroes(number, total_width);
 		else
-			number = align_to_the_right(number, flags->width);
+			number = align_to_the_right(number, total_width);
 	}
 	return (number);
 }

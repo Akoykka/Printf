@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 14:24:42 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/11 17:09:41 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/14 16:45:53 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ char	*replace_nb_with_rounded_nb(char *number, char *rounded_nb)
 	temp = ft_strchr(number, '.');
 	ft_memmove(number, &number[temp - number], ft_strlen(&number[temp - number]));
 	number = ft_strjoin(rounded_nb, number);
-	//ft_strdel(&free_er);
-	//ft_strdel(&rounded_nb);
-	return(number);
+	ft_strdel(&free_er);
+	ft_strdel(&rounded_nb);
+	return (number);
 }
 
 char	*rounding_operation(char *target, char *number)
@@ -112,19 +112,21 @@ char	*float_to_ascii(t_flags *flags, long double number)
 {	
 	char	*before_decimal;
 	char	*decimals;
-	//char	*free_er;
-	//free_er = before_decimal;
+	
+	char	*free_er;
+	
 	if (number < 0)
 	{
 		flags->negative = 1;
 		number *= -1;
 	}
 	before_decimal = base_to_ascii((unsigned long long)number, DECIMAL_BASE);
+	free_er = before_decimal;
 	decimals = decimals_to_ascii(number);
 	before_decimal = ft_strjoin(before_decimal, decimals);
-	//ft_strdel(&free_er);
-	//ft_strdel(decimals);
-	return(before_decimal);
+	ft_strdel(&free_er);
+	ft_strdel(&decimals);
+	return (before_decimal);
 }
 /*0.4445
 

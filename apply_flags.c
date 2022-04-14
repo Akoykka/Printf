@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 12:10:14 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/13 11:31:46 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/14 16:58:56 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*apply_hash_flag(t_flags *flags, char *number)
 		temp = ft_strnew(2);
 		if ((flags->conversion_type == HEX
 				|| flags->conversion_type == HEX_UPPER)
-				&& !is_value_zero(number))
+			&& !is_value_zero(number))
 		{
 			ft_strcpy(temp, "0x");
 			number = ft_strjoin(temp, number);
@@ -67,7 +67,7 @@ char	*apply_hash_flag_oct(t_flags *flags, char *number)
 	}
 	return (number);
 }
-
+/*
 char	*apply_hash_flag_hex(t_flags *flags, char *number)
 {
 	char	*temp;
@@ -90,8 +90,7 @@ char	*apply_hash_flag_hex(t_flags *flags, char *number)
 	}
 	return (number);
 }
-
-
+*/
 
 char	*apply_plus_flag(t_flags *flags, char *number)
 {
@@ -99,7 +98,6 @@ char	*apply_plus_flag(t_flags *flags, char *number)
 	char	*free_er;
 
 	free_er = number;
-
 	if (flags->plus || flags->negative)
 	{
 		temp = ft_strnew(1);

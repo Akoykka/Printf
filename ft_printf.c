@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:56:28 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/11 16:21:27 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/14 20:37:49 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,24 @@ void	dispatch_table(t_flags *flags)
 	dispatch_table[flags->conversion_type](flags);
 }
 
-char	*cpy_format(char *format)
+char	*cpy_format(char *format, t_flags *flags)
 {
 	size_t		i;
 
 	i = 0;
-	while (format[i] && format[i] != 'c' && format[i] != 's'
+	while (format[i] != 'c' && format[i] != 's'
 		&& format[i] != 'p' && format[i] != 'd' && format[i] != 'i'
 		&& format[i] != 'o' && format[i] != 'u' && format[i] != 'x'
 		&& format[i] != 'X' && format[i] != 'f' && format[i] != '%')
+	{
+		if (!format[i])
+		{
+			write(2, "error: undefined behavior", 25);
+			free(flags);
+			exit(1);
+		}
 		++i;
+	}
 	return (ft_strndup(format, &format[++i] - format));
 }
 
@@ -49,9 +57,12 @@ int	ft_printf(const char *format, ...)
 	int		i;
 	t_flags	*flags;
 	va_list	list;
+	int		return_value;
 
 	i = 0;
 	flags = (t_flags *)ft_memalloc(sizeof(t_flags));
+	if (!flags)
+		exit(1);
 	flags->printf_ret = 0;
 	va_start(list, format);
 	flags->va_ptr = &list;
@@ -60,7 +71,7 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{	
 			++i;
-			i += get_flag_values(cpy_format((char *)&format[i]), flags);
+			i += get_flag_values(cpy_format((char *)&format[i], flags), flags);
 			dispatch_table(flags);
 		}	
 		else
@@ -70,5 +81,7 @@ int	ft_printf(const char *format, ...)
 			++i;
 		}
 	}
-	return (flags->printf_ret);
+	return_value = flags->printf_ret;
+	free(flags);
+	return (return_value);
 }

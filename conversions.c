@@ -6,30 +6,11 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 14:29:41 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/13 10:40:08 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/14 20:37:43 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-
-char *add_minus(char *number)
-{
-	char	*minus;
-	char	*free_er;
-
-	minus = ft_strdup("-");
-	free_er = number;
-
-	number = ft_strjoin(minus, number);
-	//ft_strdel(minus);
-	//ft_strdel(free_er);
-
-
-	return (number);
-}
-
-
 
 void	decimal_conversion(t_flags *flags)
 {
@@ -48,8 +29,6 @@ void	decimal_conversion(t_flags *flags)
 	number = apply_plus_flag(flags, number);
 	if (flags->width > (int)ft_strlen(number))
 		number = pad_width(flags, number);
-	//if (flags->negative)
-		//number = add_minus(number);
 	flags->printf_ret += ft_strlen(number);
 	ft_putstr(number);
 	ft_strdel(&number);
@@ -79,12 +58,9 @@ void	string_conversion(t_flags *flags)
 
 	string = va_arg(*(flags->va_ptr), char *);
 	if (string == NULL)
-	{
-		ft_putstr("(null)");
-		flags->printf_ret += 6;
-		return ;
-	}
-	string = ft_strdup(string);
+		string = strdup("(null)");
+	else
+		string = ft_strdup(string);
 	string = s_apply_precision(flags, string);
 
 	if (flags->width > (int)ft_strlen(string))
@@ -135,6 +111,32 @@ void	hexadecimal_conversion(t_flags *flags)
 	ft_strdel(&number);
 }
 
+void special_putstr(char *number, t_flags *flags)
+{
+	int		print_amount;
+	char	*null_charecter;
+
+	null_charecter = ft_strnew(0);
+	print_amount = 1;
+	flags->width--;
+	if (flags->width > 1)
+		print_amount = flags->width;
+	while (*number)
+	{
+		if (*number == '^')
+		{
+			write(1, null_charecter, 1);
+			number += 2;
+		}
+		else
+			write(1, number++, 1);
+	}
+	flags->printf_ret += print_amount;
+	ft_strdel(&null_charecter);
+}
+
+
+
 void	charecter_conversion(t_flags *flags)
 {
 	int							temp;
@@ -145,13 +147,18 @@ void	charecter_conversion(t_flags *flags)
 	if (temp == '\0')
 	{
 		ft_strcpy(number, "^@");
-		flags->printf_ret--;
 		flags->width++;
 	}
 	else
 		number[0] = temp;
 	if (flags->width > (int)ft_strlen(number))
 		number = pad_width(flags, number);
+	if (ft_strstr(number, "^@"))
+	{
+		special_putstr(number, flags);
+		free(number);
+		return ;
+	}
 	flags->printf_ret += ft_strlen(number);
 	ft_putstr(number);
 	ft_strdel(&number);
@@ -170,6 +177,8 @@ void	pointer_conversion(t_flags *flags)
 	ft_strcpy(prefix, "0x");
 	number = ft_strjoin(prefix, number);
 	ft_strdel(&free_er);
+	if (flags->width > (int)ft_strlen(number))
+		number = pad_width(flags, number);
 	flags->printf_ret += ft_strlen(number);
 	ft_putstr(number);
 	ft_strdel(&number);
@@ -195,8 +204,11 @@ void	float_conversion(t_flags *flags)
 
 	temp = get_arg_f(flags);
 	number = float_to_ascii(flags, temp);
-	number = apply_plus_flag(flags, number);
 	number = apply_precision_f(flags, number);
+	number = apply_space_flag(flags, number);
+	number = apply_plus_flag(flags, number);
+	if (flags->width > (int)ft_strlen(number))
+		number = pad_width(flags, number);
 	flags->printf_ret += ft_strlen(number);
 	ft_putstr(number);
 	ft_strdel(&number);
