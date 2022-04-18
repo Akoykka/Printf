@@ -6,7 +6,7 @@
 #    By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 18:10:03 by akoykka           #+#    #+#              #
-#    Updated: 2022/04/18 19:02:30 by akoykka          ###   ########.fr        #
+#    Updated: 2022/04/18 19:52:30 by akoykka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ CC = gcc
 
 NAME = libftprintf.a
 
-SRCS = ft_printf.c apply_flags.c conversions.c csp_conversions.c rounding.c \
-		get_arg.c padding.c utils.c floats.c makestruct.c\
+SRCS = ft_printf.c apply_flags.c apply_flags2.c conversions.c csp_conversions.c\
+		rounding.c get_arg.c padding.c utils.c floats.c makestruct.c\
 		libft/ft_atoi.c libft/ft_isdigit.c libft/ft_itoa.c \
 		libft/ft_memalloc.c libft/ft_memmove.c libft/ft_memset.c \
 		libft/ft_putstr.c libft/ft_strchr.c libft/ft_strcpy.c \
@@ -29,7 +29,7 @@ SRCS = ft_printf.c apply_flags.c conversions.c csp_conversions.c rounding.c \
 FLAGS = -c -Wall -Werror -Wextra
 
 OBJECTS = ft_printf.o apply_flags.o conversions.o csp_conversions.o rounding.o \
-		get_arg.o padding.o utils.o floats.o makestruct.o \
+		get_arg.o padding.o utils.o apply_flags2.o floats.o makestruct.o \
 		ft_atoi.o ft_isdigit.o ft_itoa.o \
 		ft_memalloc.o ft_memmove.o ft_memset.o \
 		ft_putstr.o ft_strchr.o ft_strcpy.o \
@@ -49,9 +49,11 @@ $(NAME):
 
 clean:
 	@rm -f $(OBJECTS)
+	@make -C libft clean
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f libft/libft.a
 
 re: fclean all
 

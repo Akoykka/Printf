@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:56:28 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/14 20:37:49 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/18 19:51:30 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ int	ft_printf(const char *format, ...)
 	if (!flags)
 		exit(1);
 	flags->printf_ret = 0;
-	va_start(list, format);
+	va_start((flags->va_ptr), format); //// miksi et toimiiiiii
 	flags->va_ptr = &list;
 	while (format[i])
 	{
 		if (format[i] == '%')
-		{	
+		{
 			++i;
 			i += get_flag_values(cpy_format((char *)&format[i], flags), flags);
 			dispatch_table(flags);

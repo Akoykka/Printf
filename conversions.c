@@ -6,22 +6,12 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 14:29:41 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/18 19:07:28 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/18 19:52:07 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-/*
-char	*handle_min_long_long(t_flags *flags)
-{
-	char	*number;
 
-	flags->negative = 1;
-	number = ft_strdup("-9223372036854775807");
-	check_alloc(number, NULL, flags);
-	return (number);
-}
-*/
 void	decimal_conversion(t_flags *flags)
 {
 	long long			temp;
