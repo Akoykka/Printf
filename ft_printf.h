@@ -6,13 +6,14 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 18:12:57 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/14 19:31:15 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/18 09:48:49 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
+# define FLOAT 9
 # define HEX 7
 # define OCTAL 6
 # define HEX_UPPER 8
@@ -83,10 +84,10 @@ char				*float_to_ascii(t_flags *flags, long double number);
 char				*apply_precision_f(t_flags *flags, char *number);
 
 /// ROUNDING FOR FLOATS
-char				*rounding_operation(char *target, char *number);
-char				*replace_nb_with_rounded_nb(char *number, char *rounded_nb);
-int					rounding_check(char *number);
-int					bankers_rounding(char number);
+void				rounding_operation(char *target, char **number);
+void				replace_nb_with_rounded_nb(char **number, char *rounded_nb);
+int					rounding_check(char *target, char* number);
+int					bankers_rounding(char *target, char *number);
 int					is_round_nbr(char number);
 
 // PADDINGTON
@@ -105,5 +106,6 @@ void				toupper_everything(char *number);
 int					is_number_just_space(char *number);
 int					is_value_zero(char *number);
 typedef void		(*t_dispatch_table)(t_flags *flags);
+void 				special_putstr(char *number, t_flags *flags);
 
 #endif

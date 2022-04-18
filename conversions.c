@@ -6,11 +6,22 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 14:29:41 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/14 20:37:43 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/18 13:38:12 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+
+unsigned long long handle_negative_int (t_flags *flags, long long int temp)
+{
+	if (temp < 0)
+	{
+		temp *= -1; // muista min_longlong suojata (ei mahu max longlongiin)
+		flags->negative = 1;
+	}
+	return(temp);
+}
 
 void	decimal_conversion(t_flags *flags)
 {
@@ -18,11 +29,7 @@ void	decimal_conversion(t_flags *flags)
 	char				*number;
 
 	temp = get_arg_di(flags);
-	if (temp < 0)
-	{
-		temp *= -1; // muista min_longlong suojata (ei mahu max longlongiin)
-		flags->negative = 1;
-	}
+	temp = handle_negative_int(flags, temp)
 	number = base_to_ascii((unsigned long long)temp, DECIMAL_BASE);
 	number = apply_precision(flags, number);
 	number = apply_space_flag(flags, number);
@@ -42,8 +49,6 @@ void	unsigned_int_conversion(t_flags *flags)
 	temp = get_arg_oux(flags);
 	number = base_to_ascii(temp, DECIMAL_BASE);
 	number = apply_hash_flag(flags, number);
-	//number = apply_plus_flag(flags, number);
-	//number = apply_space_flag(flags, number);
 	number = apply_precision(flags, number);
 	if (flags->width > (int)ft_strlen(number))
 		number = pad_width(flags, number);
@@ -77,8 +82,6 @@ void	octal_conversion(t_flags *flags)
 
 	temp = get_arg_oux(flags);
 	number = base_to_ascii(temp, OCTAL_BASE);
-	//number = apply_plus_flag(flags, number); ei toimi
-	//number = apply_space_flag(flags, number); ei toimi
 	number = apply_precision(flags, number);
 	number = apply_hash_flag_oct(flags, number);
 	if (flags->width > (int)ft_strlen(number))
@@ -95,15 +98,10 @@ void	hexadecimal_conversion(t_flags *flags)
 
 	temp = get_arg_oux(flags);
 	number = base_to_ascii(temp, HEXADECIMAL_BASE);
-
-	//number = apply_plus_flag(flags, number);
-	//number = apply_space_flag(flags, number);
 	number = apply_precision(flags, number);
 	number = apply_hash_flag(flags, number);
 	if (flags->width > (int)ft_strlen(number))
 		number = pad_width(flags, number);
-	//if (!is_number_just_space(number))
-		//number = apply_hash_flag_hex(flags, number);
 	flags->printf_ret += ft_strlen(number);
 	if (flags->conversion_type == HEX_UPPER)
 		toupper_everything(number);
@@ -205,8 +203,8 @@ void	float_conversion(t_flags *flags)
 	temp = get_arg_f(flags);
 	number = float_to_ascii(flags, temp);
 	number = apply_precision_f(flags, number);
-	number = apply_space_flag(flags, number);
 	number = apply_plus_flag(flags, number);
+	number = apply_space_flag(flags, number);
 	if (flags->width > (int)ft_strlen(number))
 		number = pad_width(flags, number);
 	flags->printf_ret += ft_strlen(number);

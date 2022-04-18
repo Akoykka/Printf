@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 18:10:06 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/14 20:37:51 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/16 21:18:12 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,35 @@
 int	main(void)
 {
 
-	double number9 = 34.125;
+	double number9 = 14.99999000000000037857716961298137903213535;
 	float number99 = 12.345678;
 	float ninenine = 99.99999999;
 	float negninenine = -99.99999999;
+	float ninjaninja = -958.125;
+	long double ninjaninja2 = -958.125;
+	float ninjaninja22 = 2.50;
 
-	ft_printf("%-*.*s", 7, 3, "yolo");
-	ft_printf("%d", NULL);
+	ft_printf("%i\n", (0 / 2));
+	ft_printf("%.f\n", ninjaninja22);
+	printf("%.0f\n", number99);
+	printf("%.1f\n", number99);
+	printf("%.f\n", number99);
+	printf("%#.f\n", number99);
 
+	ft_printf("%0#10.1Lf\n", ninjaninja2);
+	printf("%0#10.1Lf\n", ninjaninja2);
+	ft_printf("%.1f\n", number9);
+	ft_printf("%d\n", NULL);
+	printf("%.f\n", number99);
+	printf("thisone with #:%0#10f\n", ninjaninja);
+	ft_printf("thisone with #:%0#10f\n", ninjaninja);
 	printf("OGnumber +010f is |%+010.f|\n", negninenine);
 	ft_printf("MYnumber +010f is |%+010f|\n", negninenine);
 
-	
+
 	printf("OGnumber 010.2f is |% 010.2f|\n", ninenine);
 	ft_printf("MYnumber 010.2f is |% 010.2f|\n", ninenine);
-	
+
 	printf("OGnumber is %lld\n", (long long)number9);
 	ft_printf("MYnumber is %lld\n", (long long)number9);
 
@@ -84,14 +98,14 @@ int	main(void)
 	printf("OGnumber 010.f is |%010.f|\n", ninenine);
 	ft_printf("MYnumber 010.f is |%010f|\n", ninenine);
 
-	
+
 
 	printf("OGnumber 010.2f is |%010.2f|\n", ninenine);
 	ft_printf("MYnumber 010.2f is |%010.2f|\n", ninenine);
 
 	printf("OGnumber +010f is |%+010.f|\n", negninenine);
 	ft_printf("MYnumber +010f is |%+010f|\n", negninenine);
- 
+
 	int		number;
 	int		number2;
 	char	str[] = "TESTSTRING";

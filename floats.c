@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 14:24:42 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/14 16:45:53 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/18 09:54:18 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,52 @@
 
 int	is_round_nbr(char number)
 {
-	if (number == '0' && number == '2' && number == '4'
-		&& number == '6' && number == '8')
+	if (/*number == '0'||*/ number == '2' || number == '4'
+		|| number == '6' || number == '8')
 		return (1);
 	return (0);
 }
 
-int	bankers_rounding(char number)
-{	
-	if (number == '5')
+int	bankers_rounding(char *next_decimal, char *target)
+{
+	if (*next_decimal >= '6' && *next_decimal <= '9')
+		return (ROUND_UP);
+	if (*next_decimal == '4')
+		return (bankers_rounding((next_decimal + 1), (target + 1)));
+	if (*next_decimal == '5' && !is_round_nbr(*target))
 		return (ROUND_UP);
 	return (NO_ROUNDING);
 }
-int	rounding_check(char *number)
+
+int	rounding_check(char *target, char* number)
 {
 	char	*next_decimal;
 
-	next_decimal = number + 1;
-	if (*next_decimal >= '6' && *next_decimal <= '9')
-		return (ROUND_UP);
-	if (!is_round_nbr(*number) && bankers_rounding(*next_decimal) == ROUND_UP)
+	next_decimal = target + 1;
+	//if (*next_decimal >= '6' && *next_decimal <= '9')
+	//	return (ROUND_UP);
+	if (*next_decimal == '5' && *target == '.' && (ft_atoi(number) % 2 == 0 || ft_atoi(number) == 0))
+		return (NO_ROUNDING);
+	if (bankers_rounding(next_decimal, target) == ROUND_UP)
 		return (ROUND_UP);
 	return (NO_ROUNDING);
 }
 
-char	*replace_nb_with_rounded_nb(char *number, char *rounded_nb)
+void	replace_nb_with_rounded_nb(char **number, char *rounded_nb)
 {
 	char	*temp;
 	char	*free_er;
 
-	free_er = number;
-	temp = ft_strchr(number, '.');
-	ft_memmove(number, &number[temp - number], ft_strlen(&number[temp - number]));
-	number = ft_strjoin(rounded_nb, number);
+	free_er = *number;
+	temp = ft_strchr(*number, '.');
+	ft_memmove(*number, &number[0][temp - *number], ft_strlen(&number[0][temp - *number]));
+	*number = ft_strjoin(rounded_nb, *number);
 	ft_strdel(&free_er);
 	ft_strdel(&rounded_nb);
-	return (number);
+	return ;
 }
 
-char	*rounding_operation(char *target, char *number)
+void	rounding_operation(char *target, char **number)
 {
 	int		temp;
 	char	*rounded_nb;
@@ -60,20 +67,22 @@ char	*rounding_operation(char *target, char *number)
 
 	if (*target == '.')
 	{
-		temp = ft_atoi(number);
+		temp = ft_atoi(*number);
 		temp++;
 		rounded_nb = ft_itoa(temp);
-		return (replace_nb_with_rounded_nb(number, rounded_nb));
+		replace_nb_with_rounded_nb(number, rounded_nb);
 	}
-	if (*target == '9')
+	else
 	{
-		decimal_before_target = &number[target - number - 1];
-		*target = '0';
-		rounding_operation(decimal_before_target, number);
-		return (number);
+		if (*target == '9')
+		{
+			decimal_before_target = &number[0][target - *number - 1];
+			*target = '0';
+			rounding_operation(decimal_before_target, number);
+		}
+		else
+			++*target;
 	}
-	++*target;
-	return (number);
 }
 
 char	*apply_precision_f(t_flags *flags, char *number)
@@ -85,9 +94,12 @@ char	*apply_precision_f(t_flags *flags, char *number)
 	if (flags->precision)
 		precision = flags->prec_val;
 	temp = (ft_strchr(number, '.') + precision);
-	if (rounding_check(temp) == ROUND_UP)
-		number = rounding_operation(temp, number);
-		*(temp + 1) = '\0';
+	if (rounding_check(temp, number) == ROUND_UP)
+		rounding_operation(temp, &number);
+	if (flags->precision && !flags->prec_val && !flags->hash)
+		*(ft_strchr(number, '.')) = '\0';
+	else
+		*(ft_strchr(number, '.') + precision + 1) = '\0';
 	return (number);
 }
 char	*decimals_to_ascii(long double number)
@@ -109,12 +121,12 @@ char	*decimals_to_ascii(long double number)
 }
 
 char	*float_to_ascii(t_flags *flags, long double number)
-{	
+{
 	char	*before_decimal;
 	char	*decimals;
-	
+
 	char	*free_er;
-	
+
 	if (number < 0)
 	{
 		flags->negative = 1;
@@ -128,6 +140,7 @@ char	*float_to_ascii(t_flags *flags, long double number)
 	ft_strdel(&decimals);
 	return (before_decimal);
 }
+
 /*0.4445
 
 0.4446
@@ -151,18 +164,18 @@ precision 1
 
 
 
-Jos 6 
+Jos 6
 
-pointer 6 kohdalle 
+pointer 6 kohdalle
 
-katsotaan 7 jos tarvii pyoristaa. 
+katsotaan 7 jos tarvii pyoristaa.
 
 jos on yli 5 palautetaan round_up ja pointteriin lisataan yksi, jos
-pointer on jo 9 niin lisataan aikaisempaan numeroon 1 
-lisataan kunnes loytyy joku mika ei ole 9 
+pointer on jo 9 niin lisataan aikaisempaan numeroon 1
+lisataan kunnes loytyy joku mika ei ole 9
 
 jos piste niin sitten atoi ja +1
-ja takas asciiksi ja memmove 
-
+ja takas asciiksi ja memmove
 
 */
+

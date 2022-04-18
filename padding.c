@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 19:04:37 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/14 18:32:45 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/16 21:18:13 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,11 @@ char	*pad_with_zeroes(char *number, int width)
 		*number = '0';
 		*temp = '+';
 	}
+	if (*number == ' ') // floatteja varten
+	{
+		*number = '0';
+		*temp = ' ';
+	}
 	temp2 = ft_strchr(number, 'x');
 	if (temp2 != NULL)
 	{
@@ -95,7 +100,8 @@ char	*pad_width(t_flags *flags, char *number)
 		number = align_to_the_left(number, total_width);
 	else
 	{
-		if (flags->zero && (!flags->precision && !flags->prec_val))
+		if ((flags->zero && !flags->precision && !flags->prec_val)
+			|| (flags->conversion_type == FLOAT && flags->zero))
 			number = pad_with_zeroes(number, total_width);
 		else
 			number = align_to_the_right(number, total_width);
