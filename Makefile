@@ -6,7 +6,7 @@
 #    By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 18:10:03 by akoykka           #+#    #+#              #
-#    Updated: 2022/04/13 09:45:20 by akoykka          ###   ########.fr        #
+#    Updated: 2022/04/18 19:02:30 by akoykka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = gcc
 
 NAME = libftprintf.a
 
-SRCS = ft_printf.c apply_flags.c conversions.c \
+SRCS = ft_printf.c apply_flags.c conversions.c csp_conversions.c rounding.c \
 		get_arg.c padding.c utils.c floats.c makestruct.c\
 		libft/ft_atoi.c libft/ft_isdigit.c libft/ft_itoa.c \
 		libft/ft_memalloc.c libft/ft_memmove.c libft/ft_memset.c \
@@ -26,10 +26,10 @@ SRCS = ft_printf.c apply_flags.c conversions.c \
 		libft/ft_strncpy.c libft/ft_strcat.c libft/ft_strdup.c \
 		libft/ft_strdel.c
 
-FLAGS = -c -Wall -Werror -Wextra -g
+FLAGS = -c -Wall -Werror -Wextra
 
-OBJECTS = ft_printf.o apply_flags.o conversions.o \
-		get_arg.o padding.o utils.o floats.o makestruct.o\
+OBJECTS = ft_printf.o apply_flags.o conversions.o csp_conversions.o rounding.o \
+		get_arg.o padding.o utils.o floats.o makestruct.o \
 		ft_atoi.o ft_isdigit.o ft_itoa.o \
 		ft_memalloc.o ft_memmove.o ft_memset.o \
 		ft_putstr.o ft_strchr.o ft_strcpy.o \

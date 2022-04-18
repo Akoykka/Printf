@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 16:20:08 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/18 12:13:21 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/18 17:57:54 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 long long	get_arg_di(t_flags *flags)
 {
-	int temp;
+	int	temp;
 
 	if (flags->hh)
 	{
@@ -37,7 +37,7 @@ long long	get_arg_di(t_flags *flags)
 
 unsigned long long	get_arg_oux(t_flags *flags)
 {
-	int temp;
+	int	temp;
 
 	if (flags->hh)
 	{

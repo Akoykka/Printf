@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 09:22:43 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/18 10:30:25 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/18 16:17:55 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 int main(void)
 {
-	float a = 0.05;
+	float a = 0.050000;
 	float aa = 0.04;
 	float aaa = 0.01;
 
 	float b = 0.005;
 	float c = 0.0005;
-	float d = 0.15000;
+	float d = -0.5500000000;
 	float e = 10.05;
 	float f = 10.005;
-
+	printf("%.1f\n", d);
+	printf("%.f\n", d);
+	printf("%.2f\n", a);
 	printf("%.1f\n", a);
-	printf("%.1f\n", aa);
-	printf("%.1f\n", aaa);
+	printf("%.f\n", a);
 	printf("%.1f\n", b);
 	printf("%.1f\n\n", c);
 
-	printf("%.1f\n", d);
-	printf("%.1f\n", d);
+	
 	printf("%.1f\n\n", d);
 
 	printf("%.1f\n", e);
@@ -56,6 +56,8 @@ int main(void)
 	printf("%.2f\n\n", f);
 
 
+	float dddd = 0.5000;
+	printf("%.f\n", dddd);
 
 
 

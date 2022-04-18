@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 18:10:06 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/16 21:18:12 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/18 19:05:22 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,29 @@
 
 int	main(void)
 {
-
+	double number69696 = -56.2012685;
 	double number9 = 14.99999000000000037857716961298137903213535;
-	float number99 = 12.345678;
+	
 	float ninenine = 99.99999999;
 	float negninenine = -99.99999999;
 	float ninjaninja = -958.125;
 	long double ninjaninja2 = -958.125;
 	float ninjaninja22 = 2.50;
 
+	float numero = 2.500000;
+	long long numero2 = -9223372036854775807;
+
+	printf("%ld", -9223372036854775807);
+	ft_printf("%010lld \n", numero2);
+	printf("OGnumber is %.f\n", numero);
+	ft_printf("MYnumber is %.f\n", numero);
+
+	float number99 = 12.345678;
+
+	printf("OGnumber is %.2f\n", number99);
+	ft_printf("MYnumber is %.2f\n", number99);
+	
+	ft_printf("%.6f\n", number69696);
 	ft_printf("%i\n", (0 / 2));
 	ft_printf("%.f\n", ninjaninja22);
 	printf("%.0f\n", number99);
@@ -47,7 +61,7 @@ int	main(void)
 	printf("OGnumber is %lld\n", (long long)number9);
 	ft_printf("MYnumber is %lld\n", (long long)number9);
 
-	printf("OGnumber is %f\n", number99);
+	printf("OGnumber is %f\n", number9);
 	ft_printf("MYnumber is %f\n", number9);
 
 	printf("OG. number is %.f\n", number99);
@@ -56,8 +70,7 @@ int	main(void)
 	printf("OG.1 number is %.1f\n", number99);
 	ft_printf("MY.1 number is %.1f\n", number99);
 
-	printf("OGnumber is %.2f\n", number99);
-	ft_printf("MYnumber is %.2f\n", number99);
+	
 
 	printf("OGnumber is %.3f\n", number99);
 	ft_printf("MYnumber is %.3f\n", number99);
@@ -383,10 +396,18 @@ int	main(void)
 	ft_printf("MY p float %10p\n", voidpointer);
 	printf("OG p float %10p\n", voidpointer);
 
-	ft_printf("^.^/%26lc^.^/", 'G');
-	printf("^.^/%26lc^.^/", 'G');
+	float ddd = -0.5500000000;
+	ft_printf("MY%.1f\n", ddd);
+	printf("OG%.1f\n", ddd);
 
-	ft_printf("%-*.*s", 7, 3, "yolo");
+	ft_printf("MY%.f\n", ddd);
+	printf("OG%.f\n", ddd);
+
+	ft_printf("MY%.2f\n", ddd);
+	printf("OG%.2f\n", ddd);
+	
+	
+	
 
 	system("leaks ft_printf_test");
 	return (0);

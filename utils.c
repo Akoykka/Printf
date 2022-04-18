@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 13:05:55 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/11 18:34:10 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/18 18:12:36 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ char	*base_to_ascii(unsigned long long number, int base)
 	if (number / base == 0)
 	{
 		conversion = ft_strnew(50);
+		if (!conversion)
+			return (NULL);
 		conversion[ft_strlen(conversion)] = number_to_char(number);
 		return (conversion);
 	}
@@ -46,32 +48,23 @@ void	toupper_everything(char *number)
 	}
 }
 
-/*
-char	longlong_to_char(long long number)
+void	check_alloc(char *allocated, char *free_er, t_flags *free_er2)
 {
-	if (number < 0)
-		number *= -1;
-	if (number >= 0 && number <= 9)
-		return (number + '0');
-	return (number + 87);
-}		
-char	*longlong_to_ascii(long long number, int base)
-{
-	char	*conversion;
-
-	if (number / base == 0)
-	{
-		conversion = ft_strnew(50);
-		if (number < 0)
-			conversion[0] = '-';
-		conversion[ft_strlen(conversion)] = longlong_to_char(number);
-		return (conversion);
-	}
-	else
-	{
-		conversion = longlong_to_ascii(number / base, base);
-		conversion[ft_strlen(conversion)] = longlong_to_char(number % base);
-		return (conversion);
-	}
+	if (allocated)
+		return ;
+	free(&free_er);
+	free(&free_er2);
+	write(2, "Malloc Error(printf)...Exiting\n", 32);
+	exit (1);
 }
-*/
+
+int	is_number_just_space(char *number)
+{
+	while (*number)
+	{
+		if (*number != ' ')
+			return (0);
+		++number;
+	}
+	return (1);
+}

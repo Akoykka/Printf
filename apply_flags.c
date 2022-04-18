@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 12:10:14 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/15 20:48:38 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/18 19:27:17 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	*apply_hash_flag(t_flags *flags, char *number)
 	if (flags->hash)
 	{
 		temp = ft_strnew(2);
+		check_alloc(temp, number, flags);
 		if ((flags->conversion_type == HEX
 				|| flags->conversion_type == HEX_UPPER)
 			&& !is_value_zero(number))
@@ -49,6 +50,7 @@ char	*apply_hash_flag_oct(t_flags *flags, char *number)
 	if (flags->hash)
 	{
 		temp = ft_strnew(2);
+		check_alloc(temp, number, flags);
 		if (*number != '0'
 			&& (flags->conversion_type == HEX
 				|| flags->conversion_type == HEX_UPPER))
@@ -65,32 +67,9 @@ char	*apply_hash_flag_oct(t_flags *flags, char *number)
 		}
 		ft_strdel(&temp);
 	}
+	check_alloc(number, NULL, flags);
 	return (number);
 }
-/*
-char	*apply_hash_flag_hex(t_flags *flags, char *number)
-{
-	char	*temp;
-	char	*free_er;
-	size_t	i;
-
-	i = 0;
-	if (flags->hash)
-	{
-		free_er = number;
-		temp = (char *)ft_memalloc(sizeof(char) * (flags->width + 2));
-		while (number[i] == ' ')
-			++i;
-		ft_strncpy(temp, number, i);
-		ft_strcat(temp, "0x");
-		ft_strcat(temp, &number[i]);
-		//ft_strdel(&free_er);
-		//ft_strdel(&temp);
-		return (temp);
-	}
-	return (number);
-}
-*/
 
 char	*apply_plus_flag(t_flags *flags, char *number)
 {
@@ -101,6 +80,7 @@ char	*apply_plus_flag(t_flags *flags, char *number)
 	if (flags->plus || flags->negative)
 	{
 		temp = ft_strnew(1);
+		check_alloc(temp, number, flags);
 		if (!flags->negative)
 			ft_memset(temp, '+', 1);
 		if (flags->negative)
@@ -109,6 +89,7 @@ char	*apply_plus_flag(t_flags *flags, char *number)
 		ft_strdel(&temp);
 		ft_strdel(&free_er);
 	}
+	check_alloc(number, NULL, flags);
 	return (number);
 }
 
@@ -118,11 +99,11 @@ char	*apply_space_flag(t_flags *flags, char *number)
 		&& !flags->plus
 		&& !flags->negative
 		&& !is_number_just_space(number))
-		number = align_to_the_right(number, 1);
+		number = align_to_right(number, 1, flags);
 	return (number);
 }
 
-int is_value_zero(char *number)
+int		is_value_zero(char *number)
 {
 	while (*number)
 	{
@@ -142,7 +123,7 @@ char	*apply_precision(t_flags *flags, char *number)
 		if (flags->prec_val > (int)ft_strlen(number))
 		{
 		flags->prec_val -= (int)ft_strlen(number);
-		number = pad_with_zeroes(number, flags->prec_val);
+		number = pad_with_zeroes(number, flags->prec_val, flags);
 		}
 	}
 	return (number);
@@ -156,6 +137,7 @@ char	*s_apply_precision(t_flags *flags, char *string)
 	if (flags->precision && flags->prec_val < (int)ft_strlen(string))
 	{
 		string = ft_strndup(string, flags->prec_val);
+		check_alloc(string, free_er, flags);
 		ft_strdel(&free_er);
 	}
 	return (string);

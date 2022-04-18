@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:00:36 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/14 19:08:57 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/18 19:05:02 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ int main (void)
 	//int f = 32773;
 
 
+	printf("%ld", -9223372036854775807);
 
-
-	printf("%hd", 32768);
-	printf("%hhd", 128);
-	printf("%hhd", -129);
+	//printf("%hd", 32768);
+	//printf("%hhd", 128);
+	//printf("%hhd", -129);
 	//printf("%hd\n", b);
 	//printf("%hd\n", c);
 	//printf("%hd\n", d);

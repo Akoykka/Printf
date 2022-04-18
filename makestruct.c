@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 20:18:23 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/13 10:09:25 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/18 17:57:26 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,9 @@ void	set_rest_flag_values(char *format, t_flags *flags)
 
 	temp = ft_strchr(format, '.');
 	if (temp)
-	{
 		flags->precision = 1;
-		if (ft_isdigit(*(temp + 1)))
-			flags->prec_val = ft_atoi(temp + 1);
-	}
+	if (temp && ft_isdigit(*(temp + 1)))
+		flags->prec_val = ft_atoi(temp + 1);
 	if (ft_strchr(format, '+') != NULL)
 		flags->plus = 1;
 	if (ft_strchr(format, '-') != NULL)
