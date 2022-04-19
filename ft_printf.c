@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:56:28 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/18 19:51:30 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/19 12:00:22 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,33 @@ char	*cpy_format(char *format, t_flags *flags)
 	return (ft_strndup(format, &format[++i] - format));
 }
 
+t_flags *malloc_flags_struct()
+{
+	t_flags	*flags;
+
+	flags = (t_flags *)ft_memalloc(sizeof(t_flags));
+	if (!flags)
+		exit(1);
+	return (flags);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	int		i;
 	t_flags	*flags;
-	va_list	list;
-	int		return_value;
+	int return_value;
+	va_list list;
 
 	i = 0;
-	flags = (t_flags *)ft_memalloc(sizeof(t_flags));
-	if (!flags)
-		exit(1);
+	flags = malloc_flags_struct();
 	flags->printf_ret = 0;
-	va_start((flags->va_ptr), format); //// miksi et toimiiiiii
+	va_start(list, format);
 	flags->va_ptr = &list;
 	while (format[i])
 	{
 		if (format[i] == '%')
 		{
-			++i;
+			i++;
 			i += get_flag_values(cpy_format((char *)&format[i], flags), flags);
 			dispatch_table(flags);
 		}	
@@ -78,10 +86,11 @@ int	ft_printf(const char *format, ...)
 		{
 			write(1, &format[i], 1);
 			flags->printf_ret++;
-			++i;
+			i++;
 		}
 	}
 	return_value = flags->printf_ret;
 	free(flags);
 	return (return_value);
 }
+ 

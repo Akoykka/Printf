@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 18:12:57 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/18 19:52:36 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/19 12:00:24 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int					ft_printf(const char *format, ...);
 char				*cpy_format(char *format, t_flags *flags);
 void				dispatch_table(t_flags *flags);
 int					get_flag_values(char *format, t_flags *flags);
+t_flags				*malloc_flags_struct();
 typedef void		(*t_dispatch_table)(t_flags *flags);
 
 // get_arg
