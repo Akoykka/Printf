@@ -1,4 +1,4 @@
-# ft_printf
+# Printf
 Helsinki Hive (42 school) project. 
 
 Subject:  
