@@ -1,13 +1,20 @@
 # ft_printf
-Helsinki Hive (42 school) project
+Helsinki Hive (42 school) project. 
 
-Subject: 
-  Duplicating behavior of original printf function.
+Subject:  
+  Duplicating behavior of original printf function.  
 
 Restrictions:
   Allowed functions: write, malloc, free.
-  All sudden unsuspected terminations and/or leaks result to failing grade.
-  All code must be written according school 42 norm (see section norm in main page).
+  Allowed varg library ()
+  Functions should not quit unexpectedly or have leaks: result in failing grade;
+  All code must be written according school 42 norm (see section norm in main page).  
 
-Learned concepts:
-   Data types, dispatch table, parsing.
+Problems:
+- Multiple simultaneous modifiers.
+- Handling more complex structure.
+
+Learned concepts:  
+- Data types. 
+- Dispatch table. 
+- Parsing.
