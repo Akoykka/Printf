@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 18:12:57 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/19 12:00:24 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/21 16:09:39 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int					ft_printf(const char *format, ...);
 char				*cpy_format(char *format, t_flags *flags);
 void				dispatch_table(t_flags *flags);
 int					get_flag_values(char *format, t_flags *flags);
-t_flags				*malloc_flags_struct();
+t_flags				*malloc_flags_struct(va_list *pointer);
 typedef void		(*t_dispatch_table)(t_flags *flags);
 
 // get_arg
@@ -81,6 +81,8 @@ char				*apply_space_flag(t_flags *flags, char *number);
 char				*apply_precision(t_flags *flags, char *number);
 char				*s_apply_precision(t_flags *flags, char *string);
 // Apply Flags for floats
+
+int					check_infinity_and_nan(long double temp, t_flags *flags);
 char				*decimals_to_ascii(long double number);
 char				*float_to_ascii(t_flags *flags, long double number);
 char				*apply_precision_f(t_flags *flags, char *number);
@@ -99,6 +101,7 @@ char				*align_to_right(char *number, int width, t_flags *flags);
 char				*pad_with_zeroes(char *number, int width, t_flags *flags);
 char				*pad_width(t_flags *flags, char *number);
 void				add_zeros_between_sign(char *number, char *temp);
+
 // apply flags string
 char				*s_apply_decimal_flag(char *pointer);
 
@@ -109,10 +112,10 @@ char				number_to_char(unsigned long long number);
 void				toupper_everything(char *number);
 int					is_number_just_space(char *number);
 int					is_value_zero(char *number);
-
+int					check_till_the_end(char *number);
 void				special_putstr(char *number, t_flags *flags);
 void				check_alloc(char *allocated, char *free_er,
 						t_flags *free_er2);
 char				*handle_min_long_long(t_flags *flags);
-
+char				*align_right_inf(char *number, t_flags *flags);
 #endif

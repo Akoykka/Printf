@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strequ.c                                        :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akoykka <koykka.atte@gmail.com>            +#+  +:+       +#+        */
+/*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 11:08:46 by akoykka           #+#    #+#             */
-/*   Updated: 2021/12/04 22:50:46 by akoykka          ###   ########.fr       */
+/*   Created: 2022/04/21 14:49:14 by akoykka           #+#    #+#             */
+/*   Updated: 2022/04/21 14:49:40 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-int	ft_strequ(char const *s1, char const *s2)
+int	is_round_nbr(char number)
 {
-	int	i;
-
-	i = 0;
-	if (!s1 || !s2)
-		return (0);
-	while (s1[i] || s2[i])
-	{
-		if (s1[i] == s2[i])
-			++i;
-		else
-			return (0);
-	}
-	return (1);
+	if (number == '0' || number == '2' || number == '4'
+		|| number == '6' || number == '8')
+		return (1);
+	return (0);
 }

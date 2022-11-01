@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 14:24:42 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/18 18:15:35 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/21 14:51:25 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	float_conversion(t_flags *flags)
 	char		*number;
 
 	temp = get_arg_f(flags);
+	if (check_infinity_and_nan(temp, flags))
+		return ;
 	if (temp == 0)
 		handle_negative_zero(flags, temp);
 	number = float_to_ascii(flags, temp);

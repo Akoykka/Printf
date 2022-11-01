@@ -6,7 +6,7 @@
 #    By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/03 18:10:03 by akoykka           #+#    #+#              #
-#    Updated: 2022/04/18 19:52:30 by akoykka          ###   ########.fr        #
+#    Updated: 2022/04/21 14:57:12 by akoykka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS = ft_printf.c apply_flags.c apply_flags2.c conversions.c csp_conversions.c\
 		libft/ft_strjoin.c libft/ft_strlen.c libft/ft_strndup.c \
 		libft/ft_strnew.c libft/ft_strstr.c libft/ft_toupper.c \
 		libft/ft_strncpy.c libft/ft_strcat.c libft/ft_strdup.c \
-		libft/ft_strdel.c
+		libft/ft_strdel.c infinity.c utils2.c
 
 FLAGS = -c -Wall -Werror -Wextra
 
@@ -34,45 +34,23 @@ OBJECTS = ft_printf.o apply_flags.o conversions.o csp_conversions.o rounding.o \
 		ft_memalloc.o ft_memmove.o ft_memset.o \
 		ft_putstr.o ft_strchr.o ft_strcpy.o \
 		ft_strjoin.o ft_strlen.o ft_strndup.o \
-		ft_strnew.o ft_strstr.o ft_toupper.o \
-		ft_strncpy.o ft_strcat.o ft_strdup.o ft_strdel.o
-
-NAME_TEST = ft_printf_test
+		ft_strnew.o ft_strstr.o ft_toupper.o utils2.o \
+		ft_strncpy.o ft_strcat.o ft_strdup.o ft_strdel.o infinity.o 
 
 all: $(NAME)
 
 $(NAME):
-	make -C libft
+	
 	$(CC) $(FLAGS) $(SRCS) $(INCLUDES)
 	ar rc $(NAME) $(OBJECTS)
 	ranlib $(NAME)
 
 clean:
 	@rm -f $(OBJECTS)
-	@make -C libft clean
+	
 
 fclean: clean
 	@rm -f $(NAME)
-	@rm -f libft/libft.a
-
+	
 re: fclean all
 
-norm:
-	norminette $(SRCS)
-
-test:
-	gcc -g -o $(NAME_TEST) main.c -L. -lftprintf -I "ft_printf.h"
-test1:
-	gcc  -o $(NAME_TEST) main.c -L. -lftprintf -I "ft_printf.h" -L./libft/ -lft
-
-run:
-	./$(NAME_TEST)
-
-lldb:
-	lldb ./$(NAME_TEST)
-
-dotest:
-	./printf_test/run.sh
-
-test42:
-	bash ~/workspace/42FileChecker/42FileChecker.sh

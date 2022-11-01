@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 17:59:01 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/18 19:52:34 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/21 15:34:20 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,15 @@ void	rounding_operation(char *target, char **number)
 	}
 }
 
-int	is_round_nbr(char number)
+int	check_till_the_end(char *number)
 {
-	if (number == '0' || number == '2' || number == '4'
-		|| number == '6' || number == '8')
-		return (1);
-	return (0);
+	while (*number)
+	{
+		if (*number != '0')
+			return (ROUND_UP);
+		++number;
+	}
+	return (NO_ROUNDING);
 }
 
 int	bankers_rounding(char *next_decimal, char *target)
@@ -67,14 +70,12 @@ int	bankers_rounding(char *next_decimal, char *target)
 		++target;
 	if (*next_decimal >= '6' && *next_decimal <= '9')
 		return (ROUND_UP);
-	if (*next_decimal == '4' && !is_round_nbr(*target))
-		return (bankers_rounding(next_decimal + 1, target + 1));
 	if (*next_decimal == '5')
 	{
 		if (!is_round_nbr(*target))
 			return (ROUND_UP);
 		else
-			return (bankers_rounding(next_decimal + 1, target + 1));
+			return (check_till_the_end(next_decimal + 1));
 	}
 	return (NO_ROUNDING);
 }

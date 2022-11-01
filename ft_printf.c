@@ -6,7 +6,7 @@
 /*   By: akoykka <akoykka@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 16:56:28 by akoykka           #+#    #+#             */
-/*   Updated: 2022/04/19 12:00:22 by akoykka          ###   ########.fr       */
+/*   Updated: 2022/04/21 15:31:17 by akoykka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,15 @@ char	*cpy_format(char *format, t_flags *flags)
 	return (ft_strndup(format, &format[++i] - format));
 }
 
-t_flags *malloc_flags_struct()
+t_flags	*malloc_flags_struct(va_list *pointer)
 {
 	t_flags	*flags;
 
 	flags = (t_flags *)ft_memalloc(sizeof(t_flags));
 	if (!flags)
 		exit(1);
+	flags->printf_ret = 0;
+	flags->va_ptr = pointer;
 	return (flags);
 }
 
@@ -66,14 +68,11 @@ int	ft_printf(const char *format, ...)
 {
 	int		i;
 	t_flags	*flags;
-	int return_value;
-	va_list list;
+	va_list	list;
 
 	i = 0;
-	flags = malloc_flags_struct();
-	flags->printf_ret = 0;
 	va_start(list, format);
-	flags->va_ptr = &list;
+	flags = malloc_flags_struct(&list);
 	while (format[i])
 	{
 		if (format[i] == '%')
@@ -89,8 +88,7 @@ int	ft_printf(const char *format, ...)
 			i++;
 		}
 	}
-	return_value = flags->printf_ret;
+	i = flags->printf_ret;
 	free(flags);
-	return (return_value);
+	return (i);
 }
- 
